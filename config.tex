@@ -1,8 +1,6 @@
-% Created 2022-06-21 Tue 22:27
-% Intended LaTeX compiler: pdflatex
-\documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+% Created 2022-06-21 Tue 23:28
+% Intended LaTeX compiler: xelatex
+\documentclass[a4paper,11pt]{article}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{wrapfig}
@@ -12,6 +10,15 @@
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
+\usepackage{kotex}
+\RequirePackage[math-style=TeX,bold-style=TeX]{unicode-math}
+\setmainfont{Libertinus Serif}
+\setsansfont{Libertinus Sans}[Scale=MatchUppercase]
+\setmonofont{Inconsolata}[Scale=MatchLowercase]
+\setmathfont{Libertinus Math}[Scale=MatchUppercase] % Before set*hangulfont
+\setmainhangulfont{Noto Serif CJK KR}[Scale=.885]
+\setsanshangulfont[BoldFont={* Bold}]{KoPubWorldDotum_Pro}[Scale=.885]
+\setmonohangulfont{D2Coding}[Scale=MatchLowercase]
 \author{Jay Lee}
 \date{\today}
 \title{My Emacs config}
@@ -29,9 +36,9 @@
 
 
 \section{Package management}
-\label{sec:orgb7a5715}
+\label{sec:org5af9158}
 \subsection{MELPA}
-\label{sec:org46dc425}
+\label{sec:org2cfa207}
 \begin{verbatim}
 (require 'package)
 (add-to-list 'package-archives
@@ -40,7 +47,7 @@
 \end{verbatim}
 
 \subsection{Modernized package menu}
-\label{sec:org9631a5c}
+\label{sec:orgc3cccb9}
 Use \texttt{paradox}.
 \begin{verbatim}
 (use-package paradox
@@ -48,7 +55,7 @@ Use \texttt{paradox}.
 \end{verbatim}
 
 \subsection{Better package setup}
-\label{sec:org3c78db8}
+\label{sec:orgfa34a71}
 Use \texttt{use-package}
 \begin{verbatim}
 (unless (package-installed-p 'use-package)
@@ -61,9 +68,9 @@ Use \texttt{use-package}
 \end{verbatim}
 
 \section{Pretty Emacs}
-\label{sec:orga1cc6da}
+\label{sec:org4adcc39}
 \subsection{Theme}
-\label{sec:orgadc645b}
+\label{sec:orge775cd7}
 Although \href{https://github.blog/2022-06-08-sunsetting-atom/}{Atom is being sunset by GitHub}, the default theme it provided is one of the best-looking and easy-on-the-eyes color scheme out in the wild.
 \texttt{doom-one} theme is more actively maintained than \texttt{atom-one-dark-theme}.
 \begin{verbatim}
@@ -76,7 +83,7 @@ Although \href{https://github.blog/2022-06-08-sunsetting-atom/}{Atom is being su
 \end{verbatim}
 
 \subsection{Font}
-\label{sec:org092203c}
+\label{sec:org552c632}
 JuliaMono provides the most comprehensive unicode support.
 \begin{verbatim}
 (set-frame-font "JuliaMono 15" nil t)
@@ -84,22 +91,38 @@ JuliaMono provides the most comprehensive unicode support.
 (add-to-list 'default-frame-alist '(font . "JuliaMono 15"))
 \end{verbatim}
 
+Use D2Coding for hangul (Korean letters).
+\begin{verbatim}
+(set-fontset-font t 'hangul (font-spec :name "D2Coding"))
+(setq face-font-rescale-alist '(("D2Coding" . 1.2)))
+\end{verbatim}
+
+D2Coding is scaled so that a single Korean letter corresponds to two ASCII letters:
+\begin{center}
+\begin{tabular}{ll}
+English & Korean\\
+\hline
+Emacs & 이맥스\\
+Vim & 빔\\
+\end{tabular}
+\end{center}
+
 \subsection{Icons}
-\label{sec:org15fbab5}
+\label{sec:orgd6c9b82}
 \begin{verbatim}
 (use-package all-the-icons
   :if (display-graphic-p))
 \end{verbatim}
 
 \subsection{Modeline Theme}
-\label{sec:orge23971e}
+\label{sec:orgff10778}
 \begin{verbatim}
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode))
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:org90601df}
+\label{sec:orgf1b4eab}
 Seamless title bar in macOS.
 \begin{verbatim}
 (tool-bar-mode -1)
@@ -126,9 +149,9 @@ Prettify symbols.
 \end{verbatim}
 
 \section{Key bindings}
-\label{sec:orgdcc1869}
+\label{sec:orgcd5f71e}
 \subsection{Hints}
-\label{sec:orgbf868d2}
+\label{sec:orgd9067d8}
 Show what key bindings are available.
 \begin{verbatim}
 (use-package which-key
@@ -144,7 +167,7 @@ Show completions.
 \end{verbatim}
 
 \subsection{Navigation}
-\label{sec:org55d48e4}
+\label{sec:orgbb582a4}
 Incremental search using ivy.
 \begin{verbatim}
 (use-package swiper
@@ -159,16 +182,16 @@ Use numbering to move frames.
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:org4b1637a}
+\label{sec:org086af3c}
 Use command as meta in macOS.
 \begin{verbatim}
 (setq mac-command-modifier 'meta)
 \end{verbatim}
 
 \section{Languages}
-\label{sec:org1df36b7}
+\label{sec:org0078744}
 \subsection{Lisps}
-\label{sec:org06bb4f8}
+\label{sec:org847fd0f}
 Pseudo-structural editing.
 \begin{verbatim}
 (use-package paredit
@@ -193,7 +216,7 @@ Prettify lambda.
 \end{verbatim}
 
 \subsubsection{Scheme}
-\label{sec:org0f81a96}
+\label{sec:orgf3cf697}
 Set scheme interpreter to Chicken Scheme.
 \begin{verbatim}
 (setq scheme-program-name "csi")
@@ -210,14 +233,14 @@ Prettify symbols.
 \end{verbatim}
 
 \subsection{OCaml}
-\label{sec:org121d832}
+\label{sec:orgfcab065}
 Opam setup.
 \begin{verbatim}
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
 \end{verbatim}
 
 \subsection{Python}
-\label{sec:org52788e1}
+\label{sec:org986b857}
 Use \texttt{elpy}.
 \begin{verbatim}
 (use-package elpy
@@ -225,7 +248,7 @@ Use \texttt{elpy}.
 \end{verbatim}
 
 \subsection{Org mode}
-\label{sec:orgaad49cf}
+\label{sec:org0b669f6}
 Font size and symbols.
 \begin{verbatim}
 (use-package org-superstar
@@ -280,7 +303,7 @@ Babel.
 \end{verbatim}
 
 \subsubsection{\LaTeX{}}
-\label{sec:orgea459ef}
+\label{sec:org6358734}
 \begin{verbatim}
 (use-package ox
   :ensure nil
@@ -292,7 +315,7 @@ Babel.
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:org32d6b46}
+\label{sec:orge3bcbe1}
 Visually match parentheses.
 \begin{verbatim}
 (use-package rainbow-delimiters
@@ -300,7 +323,7 @@ Visually match parentheses.
 \end{verbatim}
 
 \section{Dired}
-\label{sec:orgc25696b}
+\label{sec:orge3c6c5c}
 \begin{verbatim}
 (use-package dired
   :ensure nil
@@ -308,7 +331,7 @@ Visually match parentheses.
 \end{verbatim}
 
 \section{Terminal and shell}
-\label{sec:org37121a4}
+\label{sec:org110a8c0}
 Use \texttt{vterm}.
 \begin{verbatim}
 (use-package vterm)

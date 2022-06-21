@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-06-21 Tue 22:26 -->
+<!-- 2022-06-22 Wed 00:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>My Emacs config</title>
@@ -201,58 +201,58 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb26c530">1. Package management</a>
+<li><a href="#org527fa95">1. Package management</a>
 <ul>
-<li><a href="#orgd326ef5">1.1. MELPA</a></li>
-<li><a href="#org1f3b0e2">1.2. Modernized package menu</a></li>
-<li><a href="#orgd13cf5b">1.3. Better package setup</a></li>
+<li><a href="#org75f87d0">1.1. MELPA</a></li>
+<li><a href="#org584c490">1.2. Modernized package menu</a></li>
+<li><a href="#orgf649474">1.3. Better package setup</a></li>
 </ul>
 </li>
-<li><a href="#orgdc1ebbe">2. Pretty Emacs</a>
+<li><a href="#orgc4bee16">2. Pretty Emacs</a>
 <ul>
-<li><a href="#orgb80565e">2.1. Theme</a></li>
-<li><a href="#orgf91f891">2.2. Font</a></li>
-<li><a href="#orga2b0d26">2.3. Icons</a></li>
-<li><a href="#orgfcc3e9f">2.4. Modeline Theme</a></li>
-<li><a href="#org279a416">2.5. Miscellaneous</a></li>
+<li><a href="#orgd9f5997">2.1. Theme</a></li>
+<li><a href="#org3f97d0b">2.2. Font</a></li>
+<li><a href="#org56583db">2.3. Icons</a></li>
+<li><a href="#orgdfd3230">2.4. Modeline Theme</a></li>
+<li><a href="#orgf70a4d2">2.5. Miscellaneous</a></li>
 </ul>
 </li>
-<li><a href="#org39ef09a">3. Key bindings</a>
+<li><a href="#orge29a235">3. Key bindings</a>
 <ul>
-<li><a href="#org3a7ff46">3.1. Hints</a></li>
-<li><a href="#org3ba50b7">3.2. Navigation</a></li>
-<li><a href="#org6efe633">3.3. Miscellaneous</a></li>
+<li><a href="#orgac4195b">3.1. Hints</a></li>
+<li><a href="#org7fd9505">3.2. Navigation</a></li>
+<li><a href="#orgaf9ccdf">3.3. Miscellaneous</a></li>
 </ul>
 </li>
-<li><a href="#org1a52e42">4. Languages</a>
+<li><a href="#org2d72b74">4. Languages</a>
 <ul>
-<li><a href="#org90e834e">4.1. Lisps</a>
+<li><a href="#orgda4fb95">4.1. Lisps</a>
 <ul>
-<li><a href="#org439830c">4.1.1. Scheme</a></li>
+<li><a href="#orgb940810">4.1.1. Scheme</a></li>
 </ul>
 </li>
-<li><a href="#org7330a01">4.2. OCaml</a></li>
-<li><a href="#orga93cfdb">4.3. Python</a></li>
-<li><a href="#org3665485">4.4. Org mode</a>
+<li><a href="#org30f7329">4.2. OCaml</a></li>
+<li><a href="#org86059d2">4.3. Python</a></li>
+<li><a href="#org8d42300">4.4. Org mode</a>
 <ul>
-<li><a href="#orga806413">4.4.1. LaTeX</a></li>
+<li><a href="#orgbe8ea5d">4.4.1. LaTeX</a></li>
 </ul>
 </li>
-<li><a href="#orgf4398a8">4.5. Miscellaneous</a></li>
+<li><a href="#orgfa482ea">4.5. Miscellaneous</a></li>
 </ul>
 </li>
-<li><a href="#orgb7929ef">5. Dired</a></li>
-<li><a href="#orgd114007">6. Terminal and shell</a></li>
+<li><a href="#org950aab7">5. Dired</a></li>
+<li><a href="#orgc93720e">6. Terminal and shell</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb26c530" class="outline-2">
-<h2 id="orgb26c530"><span class="section-number-2">1.</span> Package management</h2>
+<div id="outline-container-org527fa95" class="outline-2">
+<h2 id="org527fa95"><span class="section-number-2">1.</span> Package management</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgd326ef5" class="outline-3">
-<h3 id="orgd326ef5"><span class="section-number-3">1.1.</span> MELPA</h3>
+<div id="outline-container-org75f87d0" class="outline-3">
+<h3 id="org75f87d0"><span class="section-number-3">1.1.</span> MELPA</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(require 'package)
@@ -264,8 +264,8 @@
 </div>
 </div>
 
-<div id="outline-container-org1f3b0e2" class="outline-3">
-<h3 id="org1f3b0e2"><span class="section-number-3">1.2.</span> Modernized package menu</h3>
+<div id="outline-container-org584c490" class="outline-3">
+<h3 id="org584c490"><span class="section-number-3">1.2.</span> Modernized package menu</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Use <code>paradox</code>.
@@ -278,8 +278,8 @@ Use <code>paradox</code>.
 </div>
 </div>
 
-<div id="outline-container-orgd13cf5b" class="outline-3">
-<h3 id="orgd13cf5b"><span class="section-number-3">1.3.</span> Better package setup</h3>
+<div id="outline-container-orgf649474" class="outline-3">
+<h3 id="orgf649474"><span class="section-number-3">1.3.</span> Better package setup</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Use <code>use-package</code>
@@ -298,12 +298,12 @@ Use <code>use-package</code>
 </div>
 </div>
 
-<div id="outline-container-orgdc1ebbe" class="outline-2">
-<h2 id="orgdc1ebbe"><span class="section-number-2">2.</span> Pretty Emacs</h2>
+<div id="outline-container-orgc4bee16" class="outline-2">
+<h2 id="orgc4bee16"><span class="section-number-2">2.</span> Pretty Emacs</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgb80565e" class="outline-3">
-<h3 id="orgb80565e"><span class="section-number-3">2.1.</span> Theme</h3>
+<div id="outline-container-orgd9f5997" class="outline-3">
+<h3 id="orgd9f5997"><span class="section-number-3">2.1.</span> Theme</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Although <a href="https://github.blog/2022-06-08-sunsetting-atom/">Atom is being sunset by GitHub</a>, the default theme it provided is one of the best-looking and easy-on-the-eyes color scheme out in the wild.
@@ -321,8 +321,8 @@ Although <a href="https://github.blog/2022-06-08-sunsetting-atom/">Atom is being
 </div>
 </div>
 
-<div id="outline-container-orgf91f891" class="outline-3">
-<h3 id="orgf91f891"><span class="section-number-3">2.2.</span> Font</h3>
+<div id="outline-container-org3f97d0b" class="outline-3">
+<h3 id="org3f97d0b"><span class="section-number-3">2.2.</span> Font</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 JuliaMono provides the most comprehensive unicode support.
@@ -333,11 +333,50 @@ JuliaMono provides the most comprehensive unicode support.
 (add-to-list 'default-frame-alist '(font . "JuliaMono 15"))
 </pre>
 </div>
+
+<p>
+Use D2Coding for hangul (Korean letters).
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(set-fontset-font t 'hangul (font-spec :name "D2Coding"))
+(setq face-font-rescale-alist '(("D2Coding" . 1.2)))
+</pre>
+</div>
+
+<p>
+D2Coding is scaled so that a single Korean letter corresponds to two ASCII letters:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">English</th>
+<th scope="col" class="org-left">Korean</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Emacs</td>
+<td class="org-left">이맥스</td>
+</tr>
+
+<tr>
+<td class="org-left">Vim</td>
+<td class="org-left">빔</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
-<div id="outline-container-orga2b0d26" class="outline-3">
-<h3 id="orga2b0d26"><span class="section-number-3">2.3.</span> Icons</h3>
+<div id="outline-container-org56583db" class="outline-3">
+<h3 id="org56583db"><span class="section-number-3">2.3.</span> Icons</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(use-package all-the-icons
@@ -347,8 +386,8 @@ JuliaMono provides the most comprehensive unicode support.
 </div>
 </div>
 
-<div id="outline-container-orgfcc3e9f" class="outline-3">
-<h3 id="orgfcc3e9f"><span class="section-number-3">2.4.</span> Modeline Theme</h3>
+<div id="outline-container-orgdfd3230" class="outline-3">
+<h3 id="orgdfd3230"><span class="section-number-3">2.4.</span> Modeline Theme</h3>
 <div class="outline-text-3" id="text-2-4">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(use-package doom-modeline
@@ -358,8 +397,8 @@ JuliaMono provides the most comprehensive unicode support.
 </div>
 </div>
 
-<div id="outline-container-org279a416" class="outline-3">
-<h3 id="org279a416"><span class="section-number-3">2.5.</span> Miscellaneous</h3>
+<div id="outline-container-orgf70a4d2" class="outline-3">
+<h3 id="orgf70a4d2"><span class="section-number-3">2.5.</span> Miscellaneous</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Seamless title bar in macOS.
@@ -401,12 +440,12 @@ Prettify symbols.
 </div>
 </div>
 
-<div id="outline-container-org39ef09a" class="outline-2">
-<h2 id="org39ef09a"><span class="section-number-2">3.</span> Key bindings</h2>
+<div id="outline-container-orge29a235" class="outline-2">
+<h2 id="orge29a235"><span class="section-number-2">3.</span> Key bindings</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org3a7ff46" class="outline-3">
-<h3 id="org3a7ff46"><span class="section-number-3">3.1.</span> Hints</h3>
+<div id="outline-container-orgac4195b" class="outline-3">
+<h3 id="orgac4195b"><span class="section-number-3">3.1.</span> Hints</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Show what key bindings are available.
@@ -430,8 +469,8 @@ Show completions.
 </div>
 </div>
 
-<div id="outline-container-org3ba50b7" class="outline-3">
-<h3 id="org3ba50b7"><span class="section-number-3">3.2.</span> Navigation</h3>
+<div id="outline-container-org7fd9505" class="outline-3">
+<h3 id="org7fd9505"><span class="section-number-3">3.2.</span> Navigation</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Incremental search using ivy.
@@ -454,8 +493,8 @@ Use numbering to move frames.
 </div>
 </div>
 
-<div id="outline-container-org6efe633" class="outline-3">
-<h3 id="org6efe633"><span class="section-number-3">3.3.</span> Miscellaneous</h3>
+<div id="outline-container-orgaf9ccdf" class="outline-3">
+<h3 id="orgaf9ccdf"><span class="section-number-3">3.3.</span> Miscellaneous</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Use command as meta in macOS.
@@ -468,12 +507,12 @@ Use command as meta in macOS.
 </div>
 </div>
 
-<div id="outline-container-org1a52e42" class="outline-2">
-<h2 id="org1a52e42"><span class="section-number-2">4.</span> Languages</h2>
+<div id="outline-container-org2d72b74" class="outline-2">
+<h2 id="org2d72b74"><span class="section-number-2">4.</span> Languages</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org90e834e" class="outline-3">
-<h3 id="org90e834e"><span class="section-number-3">4.1.</span> Lisps</h3>
+<div id="outline-container-orgda4fb95" class="outline-3">
+<h3 id="orgda4fb95"><span class="section-number-3">4.1.</span> Lisps</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Pseudo-structural editing.
@@ -505,8 +544,8 @@ Prettify lambda.
 </div>
 </div>
 
-<div id="outline-container-org439830c" class="outline-4">
-<h4 id="org439830c"><span class="section-number-4">4.1.1.</span> Scheme</h4>
+<div id="outline-container-orgb940810" class="outline-4">
+<h4 id="orgb940810"><span class="section-number-4">4.1.1.</span> Scheme</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 Set scheme interpreter to Chicken Scheme.
@@ -535,8 +574,8 @@ Prettify symbols.
 </div>
 </div>
 
-<div id="outline-container-org7330a01" class="outline-3">
-<h3 id="org7330a01"><span class="section-number-3">4.2.</span> OCaml</h3>
+<div id="outline-container-org30f7329" class="outline-3">
+<h3 id="org30f7329"><span class="section-number-3">4.2.</span> OCaml</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Opam setup.
@@ -548,8 +587,8 @@ Opam setup.
 </div>
 </div>
 
-<div id="outline-container-orga93cfdb" class="outline-3">
-<h3 id="orga93cfdb"><span class="section-number-3">4.3.</span> Python</h3>
+<div id="outline-container-org86059d2" class="outline-3">
+<h3 id="org86059d2"><span class="section-number-3">4.3.</span> Python</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Use <code>elpy</code>.
@@ -562,8 +601,8 @@ Use <code>elpy</code>.
 </div>
 </div>
 
-<div id="outline-container-org3665485" class="outline-3">
-<h3 id="org3665485"><span class="section-number-3">4.4.</span> Org mode</h3>
+<div id="outline-container-org8d42300" class="outline-3">
+<h3 id="org8d42300"><span class="section-number-3">4.4.</span> Org mode</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Font size and symbols.
@@ -631,8 +670,8 @@ Babel.
 </div>
 </div>
 
-<div id="outline-container-orga806413" class="outline-4">
-<h4 id="orga806413"><span class="section-number-4">4.4.1.</span> LaTeX</h4>
+<div id="outline-container-orgbe8ea5d" class="outline-4">
+<h4 id="orgbe8ea5d"><span class="section-number-4">4.4.1.</span> LaTeX</h4>
 <div class="outline-text-4" id="text-4-4-1">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(use-package ox
@@ -648,8 +687,8 @@ Babel.
 </div>
 </div>
 
-<div id="outline-container-orgf4398a8" class="outline-3">
-<h3 id="orgf4398a8"><span class="section-number-3">4.5.</span> Miscellaneous</h3>
+<div id="outline-container-orgfa482ea" class="outline-3">
+<h3 id="orgfa482ea"><span class="section-number-3">4.5.</span> Miscellaneous</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 Visually match parentheses.
@@ -663,8 +702,8 @@ Visually match parentheses.
 </div>
 </div>
 
-<div id="outline-container-orgb7929ef" class="outline-2">
-<h2 id="orgb7929ef"><span class="section-number-2">5.</span> Dired</h2>
+<div id="outline-container-org950aab7" class="outline-2">
+<h2 id="org950aab7"><span class="section-number-2">5.</span> Dired</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(use-package dired
@@ -675,8 +714,8 @@ Visually match parentheses.
 </div>
 </div>
 
-<div id="outline-container-orgd114007" class="outline-2">
-<h2 id="orgd114007"><span class="section-number-2">6.</span> Terminal and shell</h2>
+<div id="outline-container-orgc93720e" class="outline-2">
+<h2 id="orgc93720e"><span class="section-number-2">6.</span> Terminal and shell</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Use <code>vterm</code>.
@@ -690,7 +729,7 @@ Use <code>vterm</code>.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jay Lee</p>
-<p class="date">Created: 2022-06-21 Tue 22:26</p>
+<p class="date">Created: 2022-06-22 Wed 00:07</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

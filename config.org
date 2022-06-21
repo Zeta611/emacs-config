@@ -1,5 +1,16 @@
 #+TITLE: My Emacs config
 #+AUTHOR: Jay Lee
+#+LATEX_COMPILER: xelatex
+#+LATEX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage{kotex}
+#+LATEX_HEADER: \RequirePackage[math-style=TeX,bold-style=TeX]{unicode-math}
+#+LATEX_HEADER: \setmainfont{Libertinus Serif}
+#+LATEX_HEADER: \setsansfont{Libertinus Sans}[Scale=MatchUppercase]
+#+LATEX_HEADER: \setmonofont{Inconsolata}[Scale=MatchLowercase]
+#+LATEX_HEADER: \setmathfont{Libertinus Math}[Scale=MatchUppercase] % Before set*hangulfont
+#+LATEX_HEADER: \setmainhangulfont{Noto Serif CJK KR}[Scale=.885]
+#+LATEX_HEADER: \setsanshangulfont[BoldFont={* Bold}]{KoPubWorldDotum_Pro}[Scale=.885]
+#+LATEX_HEADER: \setmonohangulfont{D2Coding}[Scale=MatchLowercase]
 
 * Package management
 ** MELPA
@@ -49,6 +60,18 @@ JuliaMono provides the most comprehensive unicode support.
   ; Apply the font to emacsclients
   (add-to-list 'default-frame-alist '(font . "JuliaMono 15"))
 #+end_src
+
+Use D2Coding for hangul (Korean letters).
+#+begin_src emacs-lisp
+  (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
+  (setq face-font-rescale-alist '(("D2Coding" . 1.2)))
+#+end_src
+
+D2Coding is scaled so that a single Korean letter corresponds to two ASCII letters:
+| English | Korean |
+|---------+--------|
+| Emacs   | 이맥스 |
+| Vim     | 빔     |
 
 ** Icons
 #+begin_src emacs-lisp
