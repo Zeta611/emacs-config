@@ -1,4 +1,4 @@
-% Created 2022-06-21 Tue 17:36
+% Created 2022-06-21 Tue 22:27
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,9 +29,9 @@
 
 
 \section{Package management}
-\label{sec:orgad7addf}
+\label{sec:orgb7a5715}
 \subsection{MELPA}
-\label{sec:orgdc9a97b}
+\label{sec:org46dc425}
 \begin{verbatim}
 (require 'package)
 (add-to-list 'package-archives
@@ -40,7 +40,7 @@
 \end{verbatim}
 
 \subsection{Modernized package menu}
-\label{sec:orge43d1d0}
+\label{sec:org9631a5c}
 Use \texttt{paradox}.
 \begin{verbatim}
 (use-package paradox
@@ -48,7 +48,7 @@ Use \texttt{paradox}.
 \end{verbatim}
 
 \subsection{Better package setup}
-\label{sec:org85f3d41}
+\label{sec:org3c78db8}
 Use \texttt{use-package}
 \begin{verbatim}
 (unless (package-installed-p 'use-package)
@@ -61,17 +61,22 @@ Use \texttt{use-package}
 \end{verbatim}
 
 \section{Pretty Emacs}
-\label{sec:orgba245d8}
+\label{sec:orga1cc6da}
 \subsection{Theme}
-\label{sec:org0f503fc}
+\label{sec:orgadc645b}
 Although \href{https://github.blog/2022-06-08-sunsetting-atom/}{Atom is being sunset by GitHub}, the default theme it provided is one of the best-looking and easy-on-the-eyes color scheme out in the wild.
+\texttt{doom-one} theme is more actively maintained than \texttt{atom-one-dark-theme}.
 \begin{verbatim}
-(use-package atom-one-dark-theme
-  :config (load-theme 'atom-one-dark t))
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t)
+  (load-theme 'doom-one t))
 \end{verbatim}
 
 \subsection{Font}
-\label{sec:orgf7566b0}
+\label{sec:org092203c}
 JuliaMono provides the most comprehensive unicode support.
 \begin{verbatim}
 (set-frame-font "JuliaMono 15" nil t)
@@ -80,21 +85,21 @@ JuliaMono provides the most comprehensive unicode support.
 \end{verbatim}
 
 \subsection{Icons}
-\label{sec:orgfa52978}
+\label{sec:org15fbab5}
 \begin{verbatim}
 (use-package all-the-icons
   :if (display-graphic-p))
 \end{verbatim}
 
 \subsection{Modeline Theme}
-\label{sec:org7f49009}
+\label{sec:orge23971e}
 \begin{verbatim}
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode))
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:orgea59240}
+\label{sec:org90601df}
 Seamless title bar in macOS.
 \begin{verbatim}
 (tool-bar-mode -1)
@@ -121,9 +126,9 @@ Prettify symbols.
 \end{verbatim}
 
 \section{Key bindings}
-\label{sec:org624eda0}
+\label{sec:orgdcc1869}
 \subsection{Hints}
-\label{sec:orgb458384}
+\label{sec:orgbf868d2}
 Show what key bindings are available.
 \begin{verbatim}
 (use-package which-key
@@ -139,7 +144,7 @@ Show completions.
 \end{verbatim}
 
 \subsection{Navigation}
-\label{sec:orgbb36a9d}
+\label{sec:org55d48e4}
 Incremental search using ivy.
 \begin{verbatim}
 (use-package swiper
@@ -154,16 +159,16 @@ Use numbering to move frames.
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:org9ab60b2}
+\label{sec:org4b1637a}
 Use command as meta in macOS.
 \begin{verbatim}
 (setq mac-command-modifier 'meta)
 \end{verbatim}
 
 \section{Languages}
-\label{sec:orgfee4fd8}
+\label{sec:org1df36b7}
 \subsection{Lisps}
-\label{sec:org89f1d8c}
+\label{sec:org06bb4f8}
 Pseudo-structural editing.
 \begin{verbatim}
 (use-package paredit
@@ -188,7 +193,7 @@ Prettify lambda.
 \end{verbatim}
 
 \subsubsection{Scheme}
-\label{sec:orgd2863ff}
+\label{sec:org0f81a96}
 Set scheme interpreter to Chicken Scheme.
 \begin{verbatim}
 (setq scheme-program-name "csi")
@@ -205,14 +210,14 @@ Prettify symbols.
 \end{verbatim}
 
 \subsection{OCaml}
-\label{sec:org97de35d}
+\label{sec:org121d832}
 Opam setup.
 \begin{verbatim}
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
 \end{verbatim}
 
 \subsection{Python}
-\label{sec:org7a0f73b}
+\label{sec:org52788e1}
 Use \texttt{elpy}.
 \begin{verbatim}
 (use-package elpy
@@ -220,7 +225,7 @@ Use \texttt{elpy}.
 \end{verbatim}
 
 \subsection{Org mode}
-\label{sec:org8efd88e}
+\label{sec:orgaad49cf}
 Font size and symbols.
 \begin{verbatim}
 (use-package org-superstar
@@ -275,7 +280,7 @@ Babel.
 \end{verbatim}
 
 \subsubsection{\LaTeX{}}
-\label{sec:org388cd9a}
+\label{sec:orgea459ef}
 \begin{verbatim}
 (use-package ox
   :ensure nil
@@ -287,7 +292,7 @@ Babel.
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:org5b3b2ba}
+\label{sec:org32d6b46}
 Visually match parentheses.
 \begin{verbatim}
 (use-package rainbow-delimiters
@@ -295,7 +300,7 @@ Visually match parentheses.
 \end{verbatim}
 
 \section{Dired}
-\label{sec:orgfe5cd44}
+\label{sec:orgc25696b}
 \begin{verbatim}
 (use-package dired
   :ensure nil
@@ -303,7 +308,7 @@ Visually match parentheses.
 \end{verbatim}
 
 \section{Terminal and shell}
-\label{sec:orga69d575}
+\label{sec:org37121a4}
 Use \texttt{vterm}.
 \begin{verbatim}
 (use-package vterm)

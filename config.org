@@ -32,9 +32,14 @@ Use =use-package=
 * Pretty Emacs
 ** Theme
 Although [[https://github.blog/2022-06-08-sunsetting-atom/][Atom is being sunset by GitHub]], the default theme it provided is one of the best-looking and easy-on-the-eyes color scheme out in the wild.
+=doom-one= theme is more actively maintained than =atom-one-dark-theme=.
 #+begin_src emacs-lisp
-  (use-package atom-one-dark-theme
-    :config (load-theme 'atom-one-dark t))
+  (use-package doom-themes
+    :ensure t
+    :config
+    (setq doom-themes-enable-bold t
+	  doom-themes-enable-italic t)
+    (load-theme 'doom-one t))
 #+end_src
 
 ** Font
