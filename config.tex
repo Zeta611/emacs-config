@@ -1,4 +1,4 @@
-% Created 2022-06-21 Tue 23:28
+% Created 2022-06-22 Wed 02:20
 % Intended LaTeX compiler: xelatex
 \documentclass[a4paper,11pt]{article}
 \usepackage{graphicx}
@@ -36,9 +36,9 @@
 
 
 \section{Package management}
-\label{sec:org5af9158}
+\label{sec:orge2f482e}
 \subsection{MELPA}
-\label{sec:org2cfa207}
+\label{sec:org92ee5d3}
 \begin{verbatim}
 (require 'package)
 (add-to-list 'package-archives
@@ -46,16 +46,8 @@
 (package-initialize)
 \end{verbatim}
 
-\subsection{Modernized package menu}
-\label{sec:orgc3cccb9}
-Use \texttt{paradox}.
-\begin{verbatim}
-(use-package paradox
-  :init (paradox-enable))
-\end{verbatim}
-
 \subsection{Better package setup}
-\label{sec:orgfa34a71}
+\label{sec:org921922c}
 Use \texttt{use-package}
 \begin{verbatim}
 (unless (package-installed-p 'use-package)
@@ -67,10 +59,19 @@ Use \texttt{use-package}
 	use-package-expand-minimally t))
 \end{verbatim}
 
+\subsection{Modernized package menu}
+\label{sec:org785d7a1}
+Use \texttt{paradox}.
+\begin{verbatim}
+(use-package paradox
+  :ensure t
+  :init (paradox-enable))
+\end{verbatim}
+
 \section{Pretty Emacs}
-\label{sec:org4adcc39}
+\label{sec:orge9b6958}
 \subsection{Theme}
-\label{sec:orge775cd7}
+\label{sec:org5e4f254}
 Although \href{https://github.blog/2022-06-08-sunsetting-atom/}{Atom is being sunset by GitHub}, the default theme it provided is one of the best-looking and easy-on-the-eyes color scheme out in the wild.
 \texttt{doom-one} theme is more actively maintained than \texttt{atom-one-dark-theme}.
 \begin{verbatim}
@@ -83,7 +84,7 @@ Although \href{https://github.blog/2022-06-08-sunsetting-atom/}{Atom is being su
 \end{verbatim}
 
 \subsection{Font}
-\label{sec:org552c632}
+\label{sec:org003c86c}
 JuliaMono provides the most comprehensive unicode support.
 \begin{verbatim}
 (set-frame-font "JuliaMono 15" nil t)
@@ -108,25 +109,53 @@ Vim & 빔\\
 \end{center}
 
 \subsection{Icons}
-\label{sec:orgd6c9b82}
+\label{sec:org4a9ae51}
 \begin{verbatim}
 (use-package all-the-icons
+  :ensure t
   :if (display-graphic-p))
 \end{verbatim}
 
 \subsection{Modeline Theme}
-\label{sec:orgff10778}
+\label{sec:orgd9ad6a4}
 \begin{verbatim}
 (use-package doom-modeline
+  :ensure t
   :hook (after-init . doom-modeline-mode))
 \end{verbatim}
 
+\subsection{File explorer}
+\label{sec:org0819f98}
+A Tree layout file explorer.
+\begin{verbatim}
+(use-package treemacs
+  :ensure t
+  :bind
+  (:map global-map
+    ("M-0"       . treemacs-select-window)
+    ("C-x t 1"   . treemacs-delete-other-windows)
+    ("C-x t t"   . treemacs)
+    ("C-x t d"   . treemacs-select-directory)
+    ("C-x t B"   . treemacs-bookmark)
+    ("C-x t C-t" . treemacs-find-file)
+    ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package treemacs-icons-dired
+  :hook (dired-mode . treemacs-icons-dired-enable-once)
+  :ensure t)
+
+(use-package treemacs-magit
+  :after (treemacs magit)
+  :ensure t)
+\end{verbatim}
+
 \subsection{Miscellaneous}
-\label{sec:orgf1b4eab}
+\label{sec:orgb487822}
 Seamless title bar in macOS.
 \begin{verbatim}
 (tool-bar-mode -1)
 (use-package ns-auto-titlebar
+  :ensure t
   :config (ns-auto-titlebar-mode))
 \end{verbatim}
 
@@ -149,28 +178,31 @@ Prettify symbols.
 \end{verbatim}
 
 \section{Key bindings}
-\label{sec:orgcd5f71e}
+\label{sec:org1fe9b49}
 \subsection{Hints}
-\label{sec:orgd9067d8}
+\label{sec:org69af398}
 Show what key bindings are available.
 \begin{verbatim}
 (use-package which-key
+  :ensure t
   :config (which-key-mode))
 \end{verbatim}
 
 Show completions.
 \begin{verbatim}
 (use-package ivy
+  :ensure t
   :config
   (ivy-mode)
   (setq ivy-use-virtual-buffers t))
 \end{verbatim}
 
 \subsection{Navigation}
-\label{sec:orgbb582a4}
+\label{sec:orgee1c6a9}
 Incremental search using ivy.
 \begin{verbatim}
 (use-package swiper
+  :ensure t
   :after ivy
   :bind ("C-s" . swiper-isearch))
 \end{verbatim}
@@ -178,23 +210,52 @@ Incremental search using ivy.
 Use numbering to move frames.
 \begin{verbatim}
 (use-package window-numbering
+  :ensure t
   :config (window-numbering-mode))
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:org086af3c}
+\label{sec:org75bf772}
 Use command as meta in macOS.
 \begin{verbatim}
 (setq mac-command-modifier 'meta)
 \end{verbatim}
 
 \section{Languages}
-\label{sec:org0078744}
+\label{sec:org8162c76}
+\subsection{Language server protocol}
+\label{sec:orgc5cfe44}
+Settings for LSP.
+\begin{verbatim}
+(use-package lsp-mode
+  :ensure t
+  :init (setq lsp-keymap-prefix "C-c l")
+  :hook
+  ((tuareg-mode . lsp)
+   (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+(use-package lsp-ui
+  :ensure t
+  :after lsp-mode)
+
+(use-package lsp-ivy
+  :ensure t
+  :after (lsp-mode ivy)
+  :commands lsp-ivy-workspace-symbol)
+
+;; (use-package lsp-treemacs
+;;   :ensure t
+;;   :after (lsp-mode treemacs)
+;;   :commands lsp-treemacs-errors-list)
+\end{verbatim}
+
 \subsection{Lisps}
-\label{sec:org847fd0f}
+\label{sec:org2fcc393}
 Pseudo-structural editing.
 \begin{verbatim}
 (use-package paredit
+  :ensure t
   :init
   (autoload 'enable-paredit-mode "paredit"
     "Turn on pseudo-structural editing of Lisp code."
@@ -216,7 +277,7 @@ Prettify lambda.
 \end{verbatim}
 
 \subsubsection{Scheme}
-\label{sec:orgf3cf697}
+\label{sec:org045d135}
 Set scheme interpreter to Chicken Scheme.
 \begin{verbatim}
 (setq scheme-program-name "csi")
@@ -224,7 +285,8 @@ Set scheme interpreter to Chicken Scheme.
 
 Use \texttt{geiser}.
 \begin{verbatim}
-(use-package geiser-chicken)
+(use-package geiser-chicken
+  :ensure t)
 \end{verbatim}
 
 Prettify symbols.
@@ -233,25 +295,33 @@ Prettify symbols.
 \end{verbatim}
 
 \subsection{OCaml}
-\label{sec:orgfcab065}
-Opam setup.
+\label{sec:org799d28c}
+These packages are installed via `opam`, not from MELPA.
 \begin{verbatim}
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+(use-package ocamlformat
+  :ensure nil
+  :custom (ocamlformat-enable 'enable-outside-detected-project)
+  :bind (:map tuareg-mode-map
+	      ("C-M-<tab>" . ocamlformat))
+  :hook (before-save . ocamlformat-before-save))
 \end{verbatim}
 
 \subsection{Python}
-\label{sec:org986b857}
+\label{sec:org5bee1fc}
 Use \texttt{elpy}.
 \begin{verbatim}
 (use-package elpy
+  :ensure t
   :init (elpy-enable))
 \end{verbatim}
 
 \subsection{Org mode}
-\label{sec:org0b669f6}
+\label{sec:org33abc03}
 Font size and symbols.
 \begin{verbatim}
 (use-package org-superstar
+  :ensure t
   :config
   ;; hide #+TITLE:
   (setq org-hidden-keywords '(title))
@@ -303,7 +373,7 @@ Babel.
 \end{verbatim}
 
 \subsubsection{\LaTeX{}}
-\label{sec:org6358734}
+\label{sec:orgecef519}
 \begin{verbatim}
 (use-package ox
   :ensure nil
@@ -315,15 +385,25 @@ Babel.
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:orge3bcbe1}
+\label{sec:org9353002}
 Visually match parentheses.
 \begin{verbatim}
 (use-package rainbow-delimiters
+  :ensure t
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 \end{verbatim}
 
+\section{Git}
+\label{sec:orgaed8952}
+Use \texttt{Magit}.
+\begin{verbatim}
+(use-package magit
+  :ensure t
+  :bind (("C-c g" . magit-file-dispatch))) ; instead of C-c M-g, as recommended by the manual
+\end{verbatim}
+
 \section{Dired}
-\label{sec:orge3c6c5c}
+\label{sec:orgec283b9}
 \begin{verbatim}
 (use-package dired
   :ensure nil
@@ -331,9 +411,10 @@ Visually match parentheses.
 \end{verbatim}
 
 \section{Terminal and shell}
-\label{sec:org110a8c0}
+\label{sec:orgbefcf6f}
 Use \texttt{vterm}.
 \begin{verbatim}
-(use-package vterm)
+(use-package vterm
+  :ensure t)
 \end{verbatim}
 \end{document}

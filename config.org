@@ -21,13 +21,6 @@
   (package-initialize)
 #+end_src
 
-** Modernized package menu
-Use =paradox=.
-#+begin_src emacs-lisp
-  (use-package paradox
-    :init (paradox-enable))
-#+end_src
-
 ** Better package setup
 Use =use-package=
 #+begin_src emacs-lisp
@@ -38,6 +31,14 @@ Use =use-package=
     ; Always make sure packages are installed correctly at every startup
     (setq use-package-always-ensure t
           use-package-expand-minimally t))
+#+end_src
+
+** Modernized package menu
+Use =paradox=.
+#+begin_src emacs-lisp
+  (use-package paradox
+    :ensure t
+    :init (paradox-enable))
 #+end_src
 
 * Pretty Emacs
@@ -76,13 +77,39 @@ D2Coding is scaled so that a single Korean letter corresponds to two ASCII lette
 ** Icons
 #+begin_src emacs-lisp
   (use-package all-the-icons
+    :ensure t
     :if (display-graphic-p))
 #+end_src
 
 ** Modeline Theme
 #+begin_src emacs-lisp
   (use-package doom-modeline
+    :ensure t
     :hook (after-init . doom-modeline-mode))
+#+end_src
+
+** File explorer
+A Tree layout file explorer.
+#+begin_src emacs-lisp
+  (use-package treemacs
+    :ensure t
+    :bind
+    (:map global-map
+      ("M-0"       . treemacs-select-window)
+      ("C-x t 1"   . treemacs-delete-other-windows)
+      ("C-x t t"   . treemacs)
+      ("C-x t d"   . treemacs-select-directory)
+      ("C-x t B"   . treemacs-bookmark)
+      ("C-x t C-t" . treemacs-find-file)
+      ("C-x t M-t" . treemacs-find-tag)))
+
+  (use-package treemacs-icons-dired
+    :hook (dired-mode . treemacs-icons-dired-enable-once)
+    :ensure t)
+
+  (use-package treemacs-magit
+    :after (treemacs magit)
+    :ensure t)
 #+end_src
 
 ** Miscellaneous
@@ -90,6 +117,7 @@ Seamless title bar in macOS.
 #+begin_src emacs-lisp
   (tool-bar-mode -1)
   (use-package ns-auto-titlebar
+    :ensure t
     :config (ns-auto-titlebar-mode))
 #+end_src
 
@@ -116,12 +144,14 @@ Prettify symbols.
 Show what key bindings are available.
 #+begin_src emacs-lisp
   (use-package which-key
+    :ensure t
     :config (which-key-mode))
 #+end_src
 
 Show completions.
 #+begin_src emacs-lisp
   (use-package ivy
+    :ensure t
     :config
     (ivy-mode)
     (setq ivy-use-virtual-buffers t))
@@ -131,6 +161,7 @@ Show completions.
 Incremental search using ivy.
 #+begin_src emacs-lisp
   (use-package swiper
+    :ensure t
     :after ivy
     :bind ("C-s" . swiper-isearch))
 #+end_src
@@ -138,6 +169,7 @@ Incremental search using ivy.
 Use numbering to move frames.
 #+begin_src emacs-lisp
   (use-package window-numbering
+    :ensure t
     :config (window-numbering-mode))
 #+end_src
 
@@ -148,10 +180,37 @@ Use command as meta in macOS.
 #+end_src
 
 * Languages
+** Language server protocol
+Settings for LSP.
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :ensure t
+    :init (setq lsp-keymap-prefix "C-c l")
+    :hook
+    ((tuareg-mode . lsp)
+     (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp)
+
+  (use-package lsp-ui
+    :ensure t
+    :after lsp-mode)
+
+  (use-package lsp-ivy
+    :ensure t
+    :after (lsp-mode ivy)
+    :commands lsp-ivy-workspace-symbol)
+
+  ;; (use-package lsp-treemacs
+  ;;   :ensure t
+  ;;   :after (lsp-mode treemacs)
+  ;;   :commands lsp-treemacs-errors-list)
+#+end_src
+
 ** Lisps
 Pseudo-structural editing.
 #+begin_src emacs-lisp
   (use-package paredit
+    :ensure t
     :init
     (autoload 'enable-paredit-mode "paredit"
       "Turn on pseudo-structural editing of Lisp code."
@@ -180,7 +239,8 @@ Set scheme interpreter to Chicken Scheme.
 
 Use =geiser=.
 #+begin_src emacs-lisp
-  (use-package geiser-chicken)
+  (use-package geiser-chicken
+    :ensure t)
 #+end_src
 
 Prettify symbols.
@@ -189,15 +249,22 @@ Prettify symbols.
 #+end_src
 
 ** OCaml
-Opam setup.
+These packages are installed via `opam`, not from MELPA.
 #+begin_src emacs-lisp
   (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+  (use-package ocamlformat
+    :ensure nil
+    :custom (ocamlformat-enable 'enable-outside-detected-project)
+    :bind (:map tuareg-mode-map
+		("C-M-<tab>" . ocamlformat))
+    :hook (before-save . ocamlformat-before-save))
 #+end_src
 
 ** Python
 Use =elpy=.
 #+begin_src emacs-lisp
   (use-package elpy
+    :ensure t
     :init (elpy-enable))
 #+end_src
 
@@ -205,6 +272,7 @@ Use =elpy=.
 Font size and symbols.
 #+begin_src emacs-lisp
   (use-package org-superstar
+    :ensure t
     :config
     ;; hide #+TITLE:
     (setq org-hidden-keywords '(title))
@@ -224,9 +292,9 @@ Font size and symbols.
     (setq org-n-level-faces 4)
     ;; Document Title, (\huge)
     (set-face-attribute 'org-document-title nil
-                        :height 2.074
-                        :foreground 'unspecified
-                        :inherit 'org-level-8)
+			:height 2.074
+			:foreground 'unspecified
+			:inherit 'org-level-8)
     (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 #+end_src
 
@@ -270,7 +338,16 @@ Babel.
 Visually match parentheses.
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
+    :ensure t
     :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+end_src
+
+* Git
+Use =Magit=.
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t
+    :bind (("C-c g" . magit-file-dispatch))) ; instead of C-c M-g, as recommended by the manual
 #+end_src
 
 * Dired
@@ -283,5 +360,6 @@ Visually match parentheses.
 * Terminal and shell
 Use =vterm=.
 #+begin_src emacs-lisp
-  (use-package vterm)
+  (use-package vterm
+    :ensure t)
 #+end_src
