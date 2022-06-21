@@ -78,6 +78,11 @@ Get rid of irritating beep-boops.
   (setq visible-bell nil ring-bell-function #'flash-mode-line)
 #+end_src
 
+Prettify symbols.
+#+begin_src emacs-lisp
+  (global-prettify-symbols-mode 1)
+#+end_src
+
 * Key bindings
 ** Hints
 Show what key bindings are available.
@@ -252,12 +257,3 @@ Use =vterm=.
 #+begin_src emacs-lisp
   (use-package vterm)
 #+end_src
-
-* TODO Organize party [/]
-  - [-] call people
-    - [ ] Peter
-    - [X] Sarah
-    - [ ] Sam
-  - [X] order food
-  - [ ] think about what music to play
-  - [X] talk to the neighbors

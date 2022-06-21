@@ -1,0 +1,311 @@
+% Created 2022-06-21 Tue 17:36
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Jay Lee}
+\date{\today}
+\title{My Emacs config}
+\hypersetup{
+ pdfauthor={Jay Lee},
+ pdftitle={My Emacs config},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.1 (Org mode 9.5.2)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Package management}
+\label{sec:orgad7addf}
+\subsection{MELPA}
+\label{sec:orgdc9a97b}
+\begin{verbatim}
+(require 'package)
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+\end{verbatim}
+
+\subsection{Modernized package menu}
+\label{sec:orge43d1d0}
+Use \texttt{paradox}.
+\begin{verbatim}
+(use-package paradox
+  :init (paradox-enable))
+\end{verbatim}
+
+\subsection{Better package setup}
+\label{sec:org85f3d41}
+Use \texttt{use-package}
+\begin{verbatim}
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-and-compile
+  ; Always make sure packages are installed correctly at every startup
+  (setq use-package-always-ensure t
+	use-package-expand-minimally t))
+\end{verbatim}
+
+\section{Pretty Emacs}
+\label{sec:orgba245d8}
+\subsection{Theme}
+\label{sec:org0f503fc}
+Although \href{https://github.blog/2022-06-08-sunsetting-atom/}{Atom is being sunset by GitHub}, the default theme it provided is one of the best-looking and easy-on-the-eyes color scheme out in the wild.
+\begin{verbatim}
+(use-package atom-one-dark-theme
+  :config (load-theme 'atom-one-dark t))
+\end{verbatim}
+
+\subsection{Font}
+\label{sec:orgf7566b0}
+JuliaMono provides the most comprehensive unicode support.
+\begin{verbatim}
+(set-frame-font "JuliaMono 15" nil t)
+; Apply the font to emacsclients
+(add-to-list 'default-frame-alist '(font . "JuliaMono 15"))
+\end{verbatim}
+
+\subsection{Icons}
+\label{sec:orgfa52978}
+\begin{verbatim}
+(use-package all-the-icons
+  :if (display-graphic-p))
+\end{verbatim}
+
+\subsection{Modeline Theme}
+\label{sec:org7f49009}
+\begin{verbatim}
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode))
+\end{verbatim}
+
+\subsection{Miscellaneous}
+\label{sec:orgea59240}
+Seamless title bar in macOS.
+\begin{verbatim}
+(tool-bar-mode -1)
+(use-package ns-auto-titlebar
+  :config (ns-auto-titlebar-mode))
+\end{verbatim}
+
+Line numbering.
+\begin{verbatim}
+(global-display-line-numbers-mode)
+\end{verbatim}
+
+Get rid of irritating beep-boops.
+\begin{verbatim}
+(defun flash-mode-line ()
+  (invert-face 'mode-line)
+  (run-with-timer 0.1 nil #'invert-face 'mode-line))
+(setq visible-bell nil ring-bell-function #'flash-mode-line)
+\end{verbatim}
+
+Prettify symbols.
+\begin{verbatim}
+(global-prettify-symbols-mode 1)
+\end{verbatim}
+
+\section{Key bindings}
+\label{sec:org624eda0}
+\subsection{Hints}
+\label{sec:orgb458384}
+Show what key bindings are available.
+\begin{verbatim}
+(use-package which-key
+  :config (which-key-mode))
+\end{verbatim}
+
+Show completions.
+\begin{verbatim}
+(use-package ivy
+  :config
+  (ivy-mode)
+  (setq ivy-use-virtual-buffers t))
+\end{verbatim}
+
+\subsection{Navigation}
+\label{sec:orgbb36a9d}
+Incremental search using ivy.
+\begin{verbatim}
+(use-package swiper
+  :after ivy
+  :bind ("C-s" . swiper-isearch))
+\end{verbatim}
+
+Use numbering to move frames.
+\begin{verbatim}
+(use-package window-numbering
+  :config (window-numbering-mode))
+\end{verbatim}
+
+\subsection{Miscellaneous}
+\label{sec:org9ab60b2}
+Use command as meta in macOS.
+\begin{verbatim}
+(setq mac-command-modifier 'meta)
+\end{verbatim}
+
+\section{Languages}
+\label{sec:orgfee4fd8}
+\subsection{Lisps}
+\label{sec:org89f1d8c}
+Pseudo-structural editing.
+\begin{verbatim}
+(use-package paredit
+  :init
+  (autoload 'enable-paredit-mode "paredit"
+    "Turn on pseudo-structural editing of Lisp code."
+    t)
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+  (add-hook 'ielm-mode-hook #'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook #'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+  (add-hook 'scheme-mode-hook #'enable-paredit-mode))
+\end{verbatim}
+
+Prettify lambda.
+\begin{verbatim}
+(defun prettify-lambda ()
+  "Prettify lambda"
+  (push '("lambda" . 955) prettify-symbols-alist))
+\end{verbatim}
+
+\subsubsection{Scheme}
+\label{sec:orgd2863ff}
+Set scheme interpreter to Chicken Scheme.
+\begin{verbatim}
+(setq scheme-program-name "csi")
+\end{verbatim}
+
+Use \texttt{geiser}.
+\begin{verbatim}
+(use-package geiser-chicken)
+\end{verbatim}
+
+Prettify symbols.
+\begin{verbatim}
+(add-hook 'scheme-mode-hook #'prettify-lambda)
+\end{verbatim}
+
+\subsection{OCaml}
+\label{sec:org97de35d}
+Opam setup.
+\begin{verbatim}
+(require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+\end{verbatim}
+
+\subsection{Python}
+\label{sec:org7a0f73b}
+Use \texttt{elpy}.
+\begin{verbatim}
+(use-package elpy
+  :init (elpy-enable))
+\end{verbatim}
+
+\subsection{Org mode}
+\label{sec:org8efd88e}
+Font size and symbols.
+\begin{verbatim}
+(use-package org-superstar
+  :config
+  ;; hide #+TITLE:
+  (setq org-hidden-keywords '(title))
+  ;; set basic title font
+  (set-face-attribute 'org-level-8 nil :weight 'bold :inherit 'default)
+  ;; Low levels are unimportant = no scaling
+  (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
+  ;; Top ones get scaled the same as in LaTeX (\large, \Large, \LARGE)
+  (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.2) ;\large
+  (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.44) ;\Large
+  (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.728) ;\LARGE
+  ;; Only use the first 4 styles and do not cycle.
+  (setq org-cycle-level-faces nil)
+  (setq org-n-level-faces 4)
+  ;; Document Title, (\huge)
+  (set-face-attribute 'org-document-title nil
+		      :height 2.074
+		      :foreground 'unspecified
+		      :inherit 'org-level-8)
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+\end{verbatim}
+
+Prettify symbols.
+\begin{verbatim}
+(add-hook
+ 'org-mode-hook
+ (lambda ()
+   "Prettify Org mode symbols"
+   (push '("[ ]" . "☐") prettify-symbols-alist)
+   (push '("[X]" . "☑") prettify-symbols-alist)
+   (push '("[-]" . "❍") prettify-symbols-alist)))
+\end{verbatim}
+
+Do not open a new window when editing source.
+\begin{verbatim}
+(setq org-src-window-setup 'current-window)
+\end{verbatim}
+
+Babel.
+\begin{verbatim}
+(org-babel-do-load-languages
+  'org-babel-load-languages
+  '((scheme . t)
+    (python . t)))
+(setq org-confirm-babel-evaluate nil)
+\end{verbatim}
+
+\subsubsection{\LaTeX{}}
+\label{sec:org388cd9a}
+\begin{verbatim}
+(use-package ox
+  :ensure nil
+  :config
+  (setq org-format-latex-options
+	(plist-put org-format-latex-options :scale 1.5))
+  (setq org-latex-create-formula-image-program 'dvisvgm)
+  (setq org-preview-latex-default-process 'dvisvgm))
+\end{verbatim}
+
+\subsection{Miscellaneous}
+\label{sec:org5b3b2ba}
+Visually match parentheses.
+\begin{verbatim}
+(use-package rainbow-delimiters
+  :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+\end{verbatim}
+
+\section{Dired}
+\label{sec:orgfe5cd44}
+\begin{verbatim}
+(use-package dired
+  :ensure nil
+  :config (setq dired-kill-when-opening-new-dired-buffer t))
+\end{verbatim}
+
+\section{Terminal and shell}
+\label{sec:orga69d575}
+Use \texttt{vterm}.
+\begin{verbatim}
+(use-package vterm)
+\end{verbatim}
+\end{document}
