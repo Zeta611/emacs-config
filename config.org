@@ -1,0 +1,263 @@
+#+TITLE: My Emacs config
+#+AUTHOR: Jay Lee
+
+* Package management
+** MELPA
+#+begin_src emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives
+               '("melpa" . "https://melpa.org/packages/") t)
+  (package-initialize)
+#+end_src
+
+** Modernized package menu
+Use =paradox=.
+#+begin_src emacs-lisp
+  (use-package paradox
+    :init (paradox-enable))
+#+end_src
+
+** Better package setup
+Use =use-package=
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (eval-and-compile
+    ; Always make sure packages are installed correctly at every startup
+    (setq use-package-always-ensure t
+          use-package-expand-minimally t))
+#+end_src
+
+* Pretty Emacs
+** Theme
+Although [[https://github.blog/2022-06-08-sunsetting-atom/][Atom is being sunset by GitHub]], the default theme it provided is one of the best-looking and easy-on-the-eyes color scheme out in the wild.
+#+begin_src emacs-lisp
+  (use-package atom-one-dark-theme
+    :config (load-theme 'atom-one-dark t))
+#+end_src
+
+** Font
+JuliaMono provides the most comprehensive unicode support.
+#+begin_src emacs-lisp
+  (set-frame-font "JuliaMono 15" nil t)
+  ; Apply the font to emacsclients
+  (add-to-list 'default-frame-alist '(font . "JuliaMono 15"))
+#+end_src
+
+** Icons
+#+begin_src emacs-lisp
+  (use-package all-the-icons
+    :if (display-graphic-p))
+#+end_src
+
+** Modeline Theme
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :hook (after-init . doom-modeline-mode))
+#+end_src
+
+** Miscellaneous
+Seamless title bar in macOS.
+#+begin_src emacs-lisp
+  (tool-bar-mode -1)
+  (use-package ns-auto-titlebar
+    :config (ns-auto-titlebar-mode))
+#+end_src
+
+Line numbering.
+#+begin_src emacs-lisp
+  (global-display-line-numbers-mode)
+#+end_src
+
+Get rid of irritating beep-boops.
+#+begin_src emacs-lisp
+  (defun flash-mode-line ()
+    (invert-face 'mode-line)
+    (run-with-timer 0.1 nil #'invert-face 'mode-line))
+  (setq visible-bell nil ring-bell-function #'flash-mode-line)
+#+end_src
+
+* Key bindings
+** Hints
+Show what key bindings are available.
+#+begin_src emacs-lisp
+  (use-package which-key
+    :config (which-key-mode))
+#+end_src
+
+Show completions.
+#+begin_src emacs-lisp
+  (use-package ivy
+    :config
+    (ivy-mode)
+    (setq ivy-use-virtual-buffers t))
+#+end_src
+
+** Navigation
+Incremental search using ivy.
+#+begin_src emacs-lisp
+  (use-package swiper
+    :after ivy
+    :bind ("C-s" . swiper-isearch))
+#+end_src
+
+Use numbering to move frames.
+#+begin_src emacs-lisp
+  (use-package window-numbering
+    :config (window-numbering-mode))
+#+end_src
+
+** Miscellaneous
+Use command as meta in macOS.
+#+begin_src emacs-lisp
+  (setq mac-command-modifier 'meta)
+#+end_src
+
+* Languages
+** Lisps
+Pseudo-structural editing.
+#+begin_src emacs-lisp
+  (use-package paredit
+    :init
+    (autoload 'enable-paredit-mode "paredit"
+      "Turn on pseudo-structural editing of Lisp code."
+      t)
+    :config
+    (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+    (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+    (add-hook 'ielm-mode-hook #'enable-paredit-mode)
+    (add-hook 'lisp-mode-hook #'enable-paredit-mode)
+    (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+    (add-hook 'scheme-mode-hook #'enable-paredit-mode))
+#+end_src
+
+Prettify lambda.
+#+begin_src emacs-lisp
+  (defun prettify-lambda ()
+    "Prettify lambda"
+    (push '("lambda" . 955) prettify-symbols-alist))
+#+end_src
+
+*** Scheme
+Set scheme interpreter to Chicken Scheme.
+#+begin_src emacs-lisp
+  (setq scheme-program-name "csi")
+#+end_src
+
+Use =geiser=.
+#+begin_src emacs-lisp
+  (use-package geiser-chicken)
+#+end_src
+
+Prettify symbols.
+#+begin_src emacs-lisp
+  (add-hook 'scheme-mode-hook #'prettify-lambda)
+#+end_src
+
+** OCaml
+Opam setup.
+#+begin_src emacs-lisp
+  (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+#+end_src
+
+** Python
+Use =elpy=.
+#+begin_src emacs-lisp
+  (use-package elpy
+    :init (elpy-enable))
+#+end_src
+
+** Org mode
+Font size and symbols.
+#+begin_src emacs-lisp
+  (use-package org-superstar
+    :config
+    ;; hide #+TITLE:
+    (setq org-hidden-keywords '(title))
+    ;; set basic title font
+    (set-face-attribute 'org-level-8 nil :weight 'bold :inherit 'default)
+    ;; Low levels are unimportant = no scaling
+    (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
+    (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
+    (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
+    (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
+    ;; Top ones get scaled the same as in LaTeX (\large, \Large, \LARGE)
+    (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.2) ;\large
+    (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.44) ;\Large
+    (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.728) ;\LARGE
+    ;; Only use the first 4 styles and do not cycle.
+    (setq org-cycle-level-faces nil)
+    (setq org-n-level-faces 4)
+    ;; Document Title, (\huge)
+    (set-face-attribute 'org-document-title nil
+                        :height 2.074
+                        :foreground 'unspecified
+                        :inherit 'org-level-8)
+    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+#+end_src
+
+Prettify symbols.
+#+begin_src emacs-lisp
+  (add-hook
+   'org-mode-hook
+   (lambda ()
+     "Prettify Org mode symbols"
+     (push '("[ ]" . "☐") prettify-symbols-alist)
+     (push '("[X]" . "☑") prettify-symbols-alist)
+     (push '("[-]" . "❍") prettify-symbols-alist)))
+#+end_src
+
+Do not open a new window when editing source.
+#+begin_src emacs-lisp
+  (setq org-src-window-setup 'current-window)
+#+end_src
+
+Babel.
+#+begin_src emacs-lisp
+  (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((scheme . t)
+      (python . t)))
+  (setq org-confirm-babel-evaluate nil)
+#+end_src
+
+*** LaTeX
+#+begin_src emacs-lisp
+  (use-package ox
+    :ensure nil
+    :config
+    (setq org-format-latex-options
+          (plist-put org-format-latex-options :scale 1.5))
+    (setq org-latex-create-formula-image-program 'dvisvgm)
+    (setq org-preview-latex-default-process 'dvisvgm))
+#+end_src
+
+** Miscellaneous
+Visually match parentheses.
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+end_src
+
+* Dired
+#+begin_src emacs-lisp
+  (use-package dired
+    :ensure nil
+    :config (setq dired-kill-when-opening-new-dired-buffer t))
+#+end_src
+
+* Terminal and shell
+Use =vterm=.
+#+begin_src emacs-lisp
+  (use-package vterm)
+#+end_src
+
+* TODO Organize party [/]
+  - [-] call people
+    - [ ] Peter
+    - [X] Sarah
+    - [ ] Sam
+  - [X] order food
+  - [ ] think about what music to play
+  - [X] talk to the neighbors

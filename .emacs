@@ -1,3 +1,8 @@
+(org-babel-load-file
+ (expand-file-name
+  "config.org"
+  user-emacs-directory))
+
 ;;;; Basic .emacs with a good set of defaults, to be used as template for usage
 ;;;; with OCaml and OPAM
 ;;;;
@@ -56,97 +61,5 @@
 ;;(add-hook 'tuareg-mode-hook 'set-ocaml-error-regexp)
 ;;(add-hook 'caml-mode-hook 'set-ocaml-error-regexp)
 ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
-(require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+
 ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
-
-;; My settings
-(setq mac-command-modifier 'meta)
-
-;; MELPA
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(package-initialize)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-(load-theme 'atom-one-dark t)
-(set-frame-font "JuliaMono 15" nil t)
-; Apply the font to emacsclients
-(add-to-list 'default-frame-alist '(font . "JuliaMono 15"))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(rainbow-delimiters org-superstar paredit vterm paradox use-package atom-one-dark-theme))
- '(paradox-automatically-star t))
-
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
-(defun my-pretty-lambda ()
-  "make some word or string show as pretty Unicode symbols"
-  (setq prettify-symbols-alist
-        '(
-          ("lambda" . 955) ; λ
-          )))
-
-(add-hook 'scheme-mode-hook 'my-pretty-lambda)
-(global-prettify-symbols-mode 1)
-
-; Set default scheme to chicken
-(setq scheme-program-name "csi")
-
-(require 'ox)
-(setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
-(setq org-latex-create-formula-image-program 'dvisvgm)
-(setq org-preview-latex-default-process 'dvisvgm)
-
-(require 'org-superstar)
-;;; Titles and Sections
-;; hide #+TITLE:
-(setq org-hidden-keywords '(title))
-;; set basic title font
-(set-face-attribute 'org-level-8 nil :weight 'bold :inherit 'default)
-;; Low levels are unimportant => no scaling
-(set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
-(set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
-(set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
-(set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
-;; Top ones get scaled the same as in LaTeX (\large, \Large, \LARGE)
-(set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.2) ;\large
-(set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.44) ;\Large
-(set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.728) ;\LARGE
-;; Only use the first 4 styles and do not cycle.
-(setq org-cycle-level-faces nil)
-(setq org-n-level-faces 4)
-;; Document Title, (\huge)
-(set-face-attribute 'org-document-title nil
-                    :height 2.074
-                    :foreground 'unspecified
-                    :inherit 'org-level-8)
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-
-(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-(eval-after-load "paredit"
-  #'(define-key paredit-mode-map (kbd "C-j") 'eval-last-sexp))
-
-(setq visible-bell nil
-      ring-bell-function 'flash-mode-line)
-(defun flash-mode-line ()
-  (invert-face 'mode-line)
-  (run-with-timer 0.1 nil #'invert-face 'mode-line))
-
