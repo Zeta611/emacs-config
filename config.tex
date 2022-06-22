@@ -1,4 +1,4 @@
-% Created 2022-06-22 Wed 02:20
+% Created 2022-06-23 Thu 05:03
 % Intended LaTeX compiler: xelatex
 \documentclass[a4paper,11pt]{article}
 \usepackage{graphicx}
@@ -36,9 +36,9 @@
 
 
 \section{Package management}
-\label{sec:orge2f482e}
+\label{sec:org6808bc0}
 \subsection{MELPA}
-\label{sec:org92ee5d3}
+\label{sec:orgf2d5fe3}
 \begin{verbatim}
 (require 'package)
 (add-to-list 'package-archives
@@ -47,7 +47,7 @@
 \end{verbatim}
 
 \subsection{Better package setup}
-\label{sec:org921922c}
+\label{sec:org3b3595b}
 Use \texttt{use-package}
 \begin{verbatim}
 (unless (package-installed-p 'use-package)
@@ -60,7 +60,7 @@ Use \texttt{use-package}
 \end{verbatim}
 
 \subsection{Modernized package menu}
-\label{sec:org785d7a1}
+\label{sec:orgf137ba8}
 Use \texttt{paradox}.
 \begin{verbatim}
 (use-package paradox
@@ -69,9 +69,9 @@ Use \texttt{paradox}.
 \end{verbatim}
 
 \section{Pretty Emacs}
-\label{sec:orge9b6958}
+\label{sec:orgc474544}
 \subsection{Theme}
-\label{sec:org5e4f254}
+\label{sec:org16fd30a}
 Although \href{https://github.blog/2022-06-08-sunsetting-atom/}{Atom is being sunset by GitHub}, the default theme it provided is one of the best-looking and easy-on-the-eyes color scheme out in the wild.
 \texttt{doom-one} theme is more actively maintained than \texttt{atom-one-dark-theme}.
 \begin{verbatim}
@@ -79,12 +79,12 @@ Although \href{https://github.blog/2022-06-08-sunsetting-atom/}{Atom is being su
   :ensure t
   :config
   (setq doom-themes-enable-bold t
-	doom-themes-enable-italic t)
+    doom-themes-enable-italic t)
   (load-theme 'doom-one t))
 \end{verbatim}
 
 \subsection{Font}
-\label{sec:org003c86c}
+\label{sec:org91c9535}
 JuliaMono provides the most comprehensive unicode support.
 \begin{verbatim}
 (set-frame-font "JuliaMono 15" nil t)
@@ -93,9 +93,13 @@ JuliaMono provides the most comprehensive unicode support.
 \end{verbatim}
 
 Use D2Coding for hangul (Korean letters).
+To reliably set a hangul font, it needs to be run lately.
+I did not experiment with the earliest possible stage it needs to run, but it does work when run in a hook `after-make-frame-functions`.
 \begin{verbatim}
-(set-fontset-font t 'hangul (font-spec :name "D2Coding"))
-(setq face-font-rescale-alist '(("D2Coding" . 1.2)))
+(defun set-hangul-font (_)
+  (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
+  (setq face-font-rescale-alist '(("D2Coding" . 1.2))))
+(add-to-list 'after-make-frame-functions #'set-hangul-font)
 \end{verbatim}
 
 D2Coding is scaled so that a single Korean letter corresponds to two ASCII letters:
@@ -109,7 +113,7 @@ Vim & 빔\\
 \end{center}
 
 \subsection{Icons}
-\label{sec:org4a9ae51}
+\label{sec:orga7e8b48}
 \begin{verbatim}
 (use-package all-the-icons
   :ensure t
@@ -117,7 +121,7 @@ Vim & 빔\\
 \end{verbatim}
 
 \subsection{Modeline Theme}
-\label{sec:orgd9ad6a4}
+\label{sec:org6632076}
 \begin{verbatim}
 (use-package doom-modeline
   :ensure t
@@ -125,7 +129,7 @@ Vim & 빔\\
 \end{verbatim}
 
 \subsection{File explorer}
-\label{sec:org0819f98}
+\label{sec:orga6c0b7b}
 A Tree layout file explorer.
 \begin{verbatim}
 (use-package treemacs
@@ -150,13 +154,18 @@ A Tree layout file explorer.
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:orgb487822}
+\label{sec:org13002be}
 Seamless title bar in macOS.
 \begin{verbatim}
 (tool-bar-mode -1)
 (use-package ns-auto-titlebar
   :ensure t
   :config (ns-auto-titlebar-mode))
+\end{verbatim}
+
+Also remove the excessive scroll bar.
+\begin{verbatim}
+(scroll-bar-mode -1)
 \end{verbatim}
 
 Line numbering.
@@ -177,10 +186,32 @@ Prettify symbols.
 (global-prettify-symbols-mode 1)
 \end{verbatim}
 
+Dashboard.
+\begin{verbatim}
+;; (use-package page-break-lines
+;;   :ensure t)
+
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  ; show dashboard after emacsclient -c
+  (setq initial-buffer-choice
+    (lambda () (get-buffer-create "*dashboard*")))
+
+  (setq dashboard-banner-logo-title "Hi, Jay!")
+  (setq dashboard-startup-banner "~/Downloads/blackhole-lines.svg")
+  (setq dashboard-image-banner-max-width 512)
+  (setq dashboard-image-banner-max-height 512)
+  (setq dashboard-center-content t)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t))
+\end{verbatim}
+
 \section{Key bindings}
-\label{sec:org1fe9b49}
+\label{sec:org7b2d3e9}
 \subsection{Hints}
-\label{sec:org69af398}
+\label{sec:org6bf1c62}
 Show what key bindings are available.
 \begin{verbatim}
 (use-package which-key
@@ -198,7 +229,7 @@ Show completions.
 \end{verbatim}
 
 \subsection{Navigation}
-\label{sec:orgee1c6a9}
+\label{sec:orge872bff}
 Incremental search using ivy.
 \begin{verbatim}
 (use-package swiper
@@ -215,16 +246,37 @@ Use numbering to move frames.
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:org75bf772}
+\label{sec:org4922411}
 Use command as meta in macOS.
 \begin{verbatim}
 (setq mac-command-modifier 'meta)
 \end{verbatim}
 
+Stop fighting indentation in Org mode code snippets.
+\begin{verbatim}
+(setq org-adapt-indentation nil)
+\end{verbatim}
+
 \section{Languages}
-\label{sec:org8162c76}
-\subsection{Language server protocol}
-\label{sec:orgc5cfe44}
+\label{sec:org4fd9b64}
+\subsection{Tools}
+\label{sec:org963ba6d}
+Syntax checking.
+\begin{verbatim}
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+\end{verbatim}
+
+Completion
+\begin{verbatim}
+(use-package company
+  :ensure t
+  :init (global-company-mode))
+\end{verbatim}
+
+\subsubsection{Language server protocol}
+\label{sec:org83a0d8a}
 Settings for LSP.
 \begin{verbatim}
 (use-package lsp-mode
@@ -237,7 +289,9 @@ Settings for LSP.
 
 (use-package lsp-ui
   :ensure t
-  :after lsp-mode)
+  :after lsp-mode
+  :config
+  (setq lsp-ui-doc-show-with-cursor t))
 
 (use-package lsp-ivy
   :ensure t
@@ -251,7 +305,7 @@ Settings for LSP.
 \end{verbatim}
 
 \subsection{Lisps}
-\label{sec:org2fcc393}
+\label{sec:orgd39a4ca}
 Pseudo-structural editing.
 \begin{verbatim}
 (use-package paredit
@@ -277,7 +331,7 @@ Prettify lambda.
 \end{verbatim}
 
 \subsubsection{Scheme}
-\label{sec:org045d135}
+\label{sec:orgd3f0fcd}
 Set scheme interpreter to Chicken Scheme.
 \begin{verbatim}
 (setq scheme-program-name "csi")
@@ -295,7 +349,7 @@ Prettify symbols.
 \end{verbatim}
 
 \subsection{OCaml}
-\label{sec:org799d28c}
+\label{sec:org591d3be}
 These packages are installed via `opam`, not from MELPA.
 \begin{verbatim}
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
@@ -307,8 +361,20 @@ These packages are installed via `opam`, not from MELPA.
   :hook (before-save . ocamlformat-before-save))
 \end{verbatim}
 
+Better error message.
+\begin{verbatim}
+(defun set-ocaml-error-regexp ()
+  (set
+   'compilation-error-regexp-alist
+   (list '("[Ff]ile \\(\"\\(.*?\\)\", line \\(-?[0-9]+\\)\\(, characters \\(-?[0-9]+\\)-\\([0-9]+\\)\\)?\\)\\(:\n\\(\\(Warning .*?\\)\\|\\(Error\\)\\):\\)?"
+    2 3 (5 . 6) (9 . 11) 1 (8 compilation-message-face)))))
+
+(add-hook 'tuareg-mode-hook #'set-ocaml-error-regexp)
+(add-hook 'caml-mode-hook #'set-ocaml-error-regexp)
+\end{verbatim}
+
 \subsection{Python}
-\label{sec:org5bee1fc}
+\label{sec:org91c98cf}
 Use \texttt{elpy}.
 \begin{verbatim}
 (use-package elpy
@@ -317,7 +383,7 @@ Use \texttt{elpy}.
 \end{verbatim}
 
 \subsection{Org mode}
-\label{sec:org33abc03}
+\label{sec:org04b5a57}
 Font size and symbols.
 \begin{verbatim}
 (use-package org-superstar
@@ -373,7 +439,7 @@ Babel.
 \end{verbatim}
 
 \subsubsection{\LaTeX{}}
-\label{sec:orgecef519}
+\label{sec:org96843c7}
 \begin{verbatim}
 (use-package ox
   :ensure nil
@@ -385,7 +451,7 @@ Babel.
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:org9353002}
+\label{sec:org3763556}
 Visually match parentheses.
 \begin{verbatim}
 (use-package rainbow-delimiters
@@ -393,8 +459,10 @@ Visually match parentheses.
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 \end{verbatim}
 
-\section{Git}
-\label{sec:orgaed8952}
+\section{Miscellaneous}
+\label{sec:org6ec1d87}
+\subsection{Git}
+\label{sec:orga5b4322}
 Use \texttt{Magit}.
 \begin{verbatim}
 (use-package magit
@@ -402,16 +470,27 @@ Use \texttt{Magit}.
   :bind (("C-c g" . magit-file-dispatch))) ; instead of C-c M-g, as recommended by the manual
 \end{verbatim}
 
-\section{Dired}
-\label{sec:orgec283b9}
+\subsection{Project management}
+\label{sec:org2feab71}
+Use \texttt{projectile}
+\begin{verbatim}
+(use-package projectile
+  :ensure t
+  :init (projectile-mode +1)
+  :bind (:map projectile-mode-map
+	      ("C-c p" . projectile-command-map)))
+\end{verbatim}
+
+\subsection{Dired}
+\label{sec:org758dc23}
 \begin{verbatim}
 (use-package dired
   :ensure nil
   :config (setq dired-kill-when-opening-new-dired-buffer t))
 \end{verbatim}
 
-\section{Terminal and shell}
-\label{sec:orgbefcf6f}
+\subsection{Terminal and shell}
+\label{sec:orga7d15e0}
 Use \texttt{vterm}.
 \begin{verbatim}
 (use-package vterm

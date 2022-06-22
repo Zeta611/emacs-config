@@ -50,7 +50,7 @@ Although [[https://github.blog/2022-06-08-sunsetting-atom/][Atom is being sunset
     :ensure t
     :config
     (setq doom-themes-enable-bold t
-	  doom-themes-enable-italic t)
+      doom-themes-enable-italic t)
     (load-theme 'doom-one t))
 #+end_src
 
@@ -63,9 +63,13 @@ JuliaMono provides the most comprehensive unicode support.
 #+end_src
 
 Use D2Coding for hangul (Korean letters).
+To reliably set a hangul font, it needs to be run lately.
+I did not experiment with the earliest possible stage it needs to run, but it does work when run in a hook `after-make-frame-functions`.
 #+begin_src emacs-lisp
-  (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
-  (setq face-font-rescale-alist '(("D2Coding" . 1.2)))
+  (defun set-hangul-font (_)
+    (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
+    (setq face-font-rescale-alist '(("D2Coding" . 1.2))))
+  (add-to-list 'after-make-frame-functions #'set-hangul-font)
 #+end_src
 
 D2Coding is scaled so that a single Korean letter corresponds to two ASCII letters:
@@ -121,6 +125,11 @@ Seamless title bar in macOS.
     :config (ns-auto-titlebar-mode))
 #+end_src
 
+Also remove the excessive scroll bar.
+#+begin_src emacs-lisp
+  (scroll-bar-mode -1)
+#+end_src
+
 Line numbering.
 #+begin_src emacs-lisp
   (global-display-line-numbers-mode)
@@ -137,6 +146,28 @@ Get rid of irritating beep-boops.
 Prettify symbols.
 #+begin_src emacs-lisp
   (global-prettify-symbols-mode 1)
+#+end_src
+
+Dashboard.
+#+begin_src emacs-lisp
+  ;; (use-package page-break-lines
+  ;;   :ensure t)
+
+  (use-package dashboard
+    :ensure t
+    :config
+    (dashboard-setup-startup-hook)
+    ; show dashboard after emacsclient -c
+    (setq initial-buffer-choice
+      (lambda () (get-buffer-create "*dashboard*")))
+
+    (setq dashboard-banner-logo-title "Hi, Jay!")
+    (setq dashboard-startup-banner "~/Downloads/blackhole-lines.svg")
+    (setq dashboard-image-banner-max-width 512)
+    (setq dashboard-image-banner-max-height 512)
+    (setq dashboard-center-content t)
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t))
 #+end_src
 
 * Key bindings
@@ -179,8 +210,28 @@ Use command as meta in macOS.
   (setq mac-command-modifier 'meta)
 #+end_src
 
+Stop fighting indentation in Org mode code snippets.
+#+begin_src emacs-lisp
+  (setq org-adapt-indentation nil)
+#+end_src
+
 * Languages
-** Language server protocol
+** Tools
+Syntax checking.
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
+#+end_src
+
+Completion
+#+begin_src emacs-lisp
+  (use-package company
+    :ensure t
+    :init (global-company-mode))
+#+end_src
+
+*** Language server protocol
 Settings for LSP.
 #+begin_src emacs-lisp
   (use-package lsp-mode
@@ -193,7 +244,9 @@ Settings for LSP.
 
   (use-package lsp-ui
     :ensure t
-    :after lsp-mode)
+    :after lsp-mode
+    :config
+    (setq lsp-ui-doc-show-with-cursor t))
 
   (use-package lsp-ivy
     :ensure t
@@ -256,8 +309,20 @@ These packages are installed via `opam`, not from MELPA.
     :ensure nil
     :custom (ocamlformat-enable 'enable-outside-detected-project)
     :bind (:map tuareg-mode-map
-		("C-M-<tab>" . ocamlformat))
+                ("C-M-<tab>" . ocamlformat))
     :hook (before-save . ocamlformat-before-save))
+#+end_src
+
+Better error message.
+#+begin_src emacs-lisp
+  (defun set-ocaml-error-regexp ()
+    (set
+     'compilation-error-regexp-alist
+     (list '("[Ff]ile \\(\"\\(.*?\\)\", line \\(-?[0-9]+\\)\\(, characters \\(-?[0-9]+\\)-\\([0-9]+\\)\\)?\\)\\(:\n\\(\\(Warning .*?\\)\\|\\(Error\\)\\):\\)?"
+      2 3 (5 . 6) (9 . 11) 1 (8 compilation-message-face)))))
+
+  (add-hook 'tuareg-mode-hook #'set-ocaml-error-regexp)
+  (add-hook 'caml-mode-hook #'set-ocaml-error-regexp)
 #+end_src
 
 ** Python
@@ -292,9 +357,9 @@ Font size and symbols.
     (setq org-n-level-faces 4)
     ;; Document Title, (\huge)
     (set-face-attribute 'org-document-title nil
-			:height 2.074
-			:foreground 'unspecified
-			:inherit 'org-level-8)
+                        :height 2.074
+                        :foreground 'unspecified
+                        :inherit 'org-level-8)
     (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 #+end_src
 
@@ -342,7 +407,8 @@ Visually match parentheses.
     :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+end_src
 
-* Git
+* Miscellaneous
+** Git
 Use =Magit=.
 #+begin_src emacs-lisp
   (use-package magit
@@ -350,14 +416,24 @@ Use =Magit=.
     :bind (("C-c g" . magit-file-dispatch))) ; instead of C-c M-g, as recommended by the manual
 #+end_src
 
-* Dired
+** Project management
+Use =projectile=
+#+begin_src emacs-lisp
+  (use-package projectile
+    :ensure t
+    :init (projectile-mode +1)
+    :bind (:map projectile-mode-map
+                ("C-c p" . projectile-command-map)))
+#+end_src
+
+** Dired
 #+begin_src emacs-lisp
   (use-package dired
     :ensure nil
     :config (setq dired-kill-when-opening-new-dired-buffer t))
 #+end_src
 
-* Terminal and shell
+** Terminal and shell
 Use =vterm=.
 #+begin_src emacs-lisp
   (use-package vterm
