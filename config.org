@@ -133,6 +133,7 @@ Also remove the excessive scroll bar.
 Line numbering.
 #+begin_src emacs-lisp
   (global-display-line-numbers-mode)
+  (setq display-line-numbers-type 'relative)
 #+end_src
 
 Get rid of irritating beep-boops.
@@ -399,6 +400,13 @@ Babel.
     (setq org-preview-latex-default-process 'dvisvgm))
 #+end_src
 
+DocView settings for preview.
+#+begin_src emacs-lisp
+  (setq doc-view-resolution 600)
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  (add-hook 'doc-view-mode-hook 'doc-view-fit-width-to-window)
+#+end_src
+
 ** Miscellaneous
 Visually match parentheses.
 #+begin_src emacs-lisp
@@ -408,6 +416,12 @@ Visually match parentheses.
 #+end_src
 
 * Miscellaneous
+** Other Emacs settings
+Always select the help window.
+#+begin_src emacs-lisp
+  (setq help-window-select t)
+#+end_src
+
 ** Git
 Use =Magit=.
 #+begin_src emacs-lisp

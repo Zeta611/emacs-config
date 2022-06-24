@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-06-23 Thu 05:03 -->
+<!-- 2022-06-24 Fri 12:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>My Emacs config</title>
@@ -201,70 +201,71 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbee2a82">1. Package management</a>
+<li><a href="#org2a2a76c">1. Package management</a>
 <ul>
-<li><a href="#org67b69ef">1.1. MELPA</a></li>
-<li><a href="#org2b238e5">1.2. Better package setup</a></li>
-<li><a href="#org5300508">1.3. Modernized package menu</a></li>
+<li><a href="#org4ad5cb2">1.1. MELPA</a></li>
+<li><a href="#org284d309">1.2. Better package setup</a></li>
+<li><a href="#org2f8ac32">1.3. Modernized package menu</a></li>
 </ul>
 </li>
-<li><a href="#orgb1fc4e9">2. Pretty Emacs</a>
+<li><a href="#org92845c6">2. Pretty Emacs</a>
 <ul>
-<li><a href="#org121098c">2.1. Theme</a></li>
-<li><a href="#orge0fcc8d">2.2. Font</a></li>
-<li><a href="#orgc32ea1e">2.3. Icons</a></li>
-<li><a href="#org3c10b26">2.4. Modeline Theme</a></li>
-<li><a href="#orgfc12185">2.5. File explorer</a></li>
-<li><a href="#orgd4cfded">2.6. Miscellaneous</a></li>
+<li><a href="#orgd0ca0ec">2.1. Theme</a></li>
+<li><a href="#org2a21b69">2.2. Font</a></li>
+<li><a href="#orgf2079ee">2.3. Icons</a></li>
+<li><a href="#org4e7a439">2.4. Modeline Theme</a></li>
+<li><a href="#orge725604">2.5. File explorer</a></li>
+<li><a href="#orga0646d1">2.6. Miscellaneous</a></li>
 </ul>
 </li>
-<li><a href="#orgba4d87f">3. Key bindings</a>
+<li><a href="#org6b36410">3. Key bindings</a>
 <ul>
-<li><a href="#orgd246568">3.1. Hints</a></li>
-<li><a href="#orgb254b08">3.2. Navigation</a></li>
-<li><a href="#org8a5f9b1">3.3. Miscellaneous</a></li>
+<li><a href="#org484cd19">3.1. Hints</a></li>
+<li><a href="#orgc8686e4">3.2. Navigation</a></li>
+<li><a href="#orgbfec2ce">3.3. Miscellaneous</a></li>
 </ul>
 </li>
-<li><a href="#org4e56103">4. Languages</a>
+<li><a href="#org2098098">4. Languages</a>
 <ul>
-<li><a href="#orgbb2d910">4.1. Tools</a>
+<li><a href="#orgcbb757b">4.1. Tools</a>
 <ul>
-<li><a href="#org81063ad">4.1.1. Language server protocol</a></li>
+<li><a href="#org9f4511f">4.1.1. Language server protocol</a></li>
 </ul>
 </li>
-<li><a href="#org6f3349e">4.2. Lisps</a>
+<li><a href="#orgb069717">4.2. Lisps</a>
 <ul>
-<li><a href="#org7427cc6">4.2.1. Scheme</a></li>
+<li><a href="#orga32646e">4.2.1. Scheme</a></li>
 </ul>
 </li>
-<li><a href="#orga5db254">4.3. OCaml</a></li>
-<li><a href="#org20f1827">4.4. Python</a></li>
-<li><a href="#orgf19911e">4.5. Org mode</a>
+<li><a href="#orgad88c01">4.3. OCaml</a></li>
+<li><a href="#org4862d73">4.4. Python</a></li>
+<li><a href="#org652735c">4.5. Org mode</a>
 <ul>
-<li><a href="#org992eefa">4.5.1. LaTeX</a></li>
+<li><a href="#org782cc9a">4.5.1. LaTeX</a></li>
 </ul>
 </li>
-<li><a href="#orgca58288">4.6. Miscellaneous</a></li>
+<li><a href="#orgbb3319f">4.6. Miscellaneous</a></li>
 </ul>
 </li>
-<li><a href="#org461e03c">5. Miscellaneous</a>
+<li><a href="#org1852c09">5. Miscellaneous</a>
 <ul>
-<li><a href="#org103d716">5.1. Git</a></li>
-<li><a href="#org880f419">5.2. Project management</a></li>
-<li><a href="#orga3477dc">5.3. Dired</a></li>
-<li><a href="#org1d8735f">5.4. Terminal and shell</a></li>
+<li><a href="#orge44949a">5.1. Other Emacs settings</a></li>
+<li><a href="#org27688c6">5.2. Git</a></li>
+<li><a href="#org718a816">5.3. Project management</a></li>
+<li><a href="#orgb36b6c2">5.4. Dired</a></li>
+<li><a href="#org754f82a">5.5. Terminal and shell</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgbee2a82" class="outline-2">
-<h2 id="orgbee2a82"><span class="section-number-2">1.</span> Package management</h2>
+<div id="outline-container-org2a2a76c" class="outline-2">
+<h2 id="org2a2a76c"><span class="section-number-2">1.</span> Package management</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org67b69ef" class="outline-3">
-<h3 id="org67b69ef"><span class="section-number-3">1.1.</span> MELPA</h3>
+<div id="outline-container-org4ad5cb2" class="outline-3">
+<h3 id="org4ad5cb2"><span class="section-number-3">1.1.</span> MELPA</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(require 'package)
@@ -276,8 +277,8 @@
 </div>
 </div>
 
-<div id="outline-container-org2b238e5" class="outline-3">
-<h3 id="org2b238e5"><span class="section-number-3">1.2.</span> Better package setup</h3>
+<div id="outline-container-org284d309" class="outline-3">
+<h3 id="org284d309"><span class="section-number-3">1.2.</span> Better package setup</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Use <code>use-package</code>
@@ -295,8 +296,8 @@ Use <code>use-package</code>
 </div>
 </div>
 
-<div id="outline-container-org5300508" class="outline-3">
-<h3 id="org5300508"><span class="section-number-3">1.3.</span> Modernized package menu</h3>
+<div id="outline-container-org2f8ac32" class="outline-3">
+<h3 id="org2f8ac32"><span class="section-number-3">1.3.</span> Modernized package menu</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Use <code>paradox</code>.
@@ -311,12 +312,12 @@ Use <code>paradox</code>.
 </div>
 </div>
 
-<div id="outline-container-orgb1fc4e9" class="outline-2">
-<h2 id="orgb1fc4e9"><span class="section-number-2">2.</span> Pretty Emacs</h2>
+<div id="outline-container-org92845c6" class="outline-2">
+<h2 id="org92845c6"><span class="section-number-2">2.</span> Pretty Emacs</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org121098c" class="outline-3">
-<h3 id="org121098c"><span class="section-number-3">2.1.</span> Theme</h3>
+<div id="outline-container-orgd0ca0ec" class="outline-3">
+<h3 id="orgd0ca0ec"><span class="section-number-3">2.1.</span> Theme</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Although <a href="https://github.blog/2022-06-08-sunsetting-atom/">Atom is being sunset by GitHub</a>, the default theme it provided is one of the best-looking and easy-on-the-eyes color scheme out in the wild.
@@ -334,8 +335,8 @@ Although <a href="https://github.blog/2022-06-08-sunsetting-atom/">Atom is being
 </div>
 </div>
 
-<div id="outline-container-orge0fcc8d" class="outline-3">
-<h3 id="orge0fcc8d"><span class="section-number-3">2.2.</span> Font</h3>
+<div id="outline-container-org2a21b69" class="outline-3">
+<h3 id="org2a21b69"><span class="section-number-3">2.2.</span> Font</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 JuliaMono provides the most comprehensive unicode support.
@@ -392,8 +393,8 @@ D2Coding is scaled so that a single Korean letter corresponds to two ASCII lette
 </div>
 </div>
 
-<div id="outline-container-orgc32ea1e" class="outline-3">
-<h3 id="orgc32ea1e"><span class="section-number-3">2.3.</span> Icons</h3>
+<div id="outline-container-orgf2079ee" class="outline-3">
+<h3 id="orgf2079ee"><span class="section-number-3">2.3.</span> Icons</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(use-package all-the-icons
@@ -404,8 +405,8 @@ D2Coding is scaled so that a single Korean letter corresponds to two ASCII lette
 </div>
 </div>
 
-<div id="outline-container-org3c10b26" class="outline-3">
-<h3 id="org3c10b26"><span class="section-number-3">2.4.</span> Modeline Theme</h3>
+<div id="outline-container-org4e7a439" class="outline-3">
+<h3 id="org4e7a439"><span class="section-number-3">2.4.</span> Modeline Theme</h3>
 <div class="outline-text-3" id="text-2-4">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(use-package doom-modeline
@@ -416,8 +417,8 @@ D2Coding is scaled so that a single Korean letter corresponds to two ASCII lette
 </div>
 </div>
 
-<div id="outline-container-orgfc12185" class="outline-3">
-<h3 id="orgfc12185"><span class="section-number-3">2.5.</span> File explorer</h3>
+<div id="outline-container-orge725604" class="outline-3">
+<h3 id="orge725604"><span class="section-number-3">2.5.</span> File explorer</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 A Tree layout file explorer.
@@ -447,8 +448,8 @@ A Tree layout file explorer.
 </div>
 </div>
 
-<div id="outline-container-orgd4cfded" class="outline-3">
-<h3 id="orgd4cfded"><span class="section-number-3">2.6.</span> Miscellaneous</h3>
+<div id="outline-container-orga0646d1" class="outline-3">
+<h3 id="orga0646d1"><span class="section-number-3">2.6.</span> Miscellaneous</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Seamless title bar in macOS.
@@ -474,6 +475,7 @@ Line numbering.
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(global-display-line-numbers-mode)
+(setq display-line-numbers-type 'relative)
 </pre>
 </div>
 
@@ -524,12 +526,12 @@ Dashboard.
 </div>
 </div>
 
-<div id="outline-container-orgba4d87f" class="outline-2">
-<h2 id="orgba4d87f"><span class="section-number-2">3.</span> Key bindings</h2>
+<div id="outline-container-org6b36410" class="outline-2">
+<h2 id="org6b36410"><span class="section-number-2">3.</span> Key bindings</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgd246568" class="outline-3">
-<h3 id="orgd246568"><span class="section-number-3">3.1.</span> Hints</h3>
+<div id="outline-container-org484cd19" class="outline-3">
+<h3 id="org484cd19"><span class="section-number-3">3.1.</span> Hints</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Show what key bindings are available.
@@ -555,8 +557,8 @@ Show completions.
 </div>
 </div>
 
-<div id="outline-container-orgb254b08" class="outline-3">
-<h3 id="orgb254b08"><span class="section-number-3">3.2.</span> Navigation</h3>
+<div id="outline-container-orgc8686e4" class="outline-3">
+<h3 id="orgc8686e4"><span class="section-number-3">3.2.</span> Navigation</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Incremental search using ivy.
@@ -581,8 +583,8 @@ Use numbering to move frames.
 </div>
 </div>
 
-<div id="outline-container-org8a5f9b1" class="outline-3">
-<h3 id="org8a5f9b1"><span class="section-number-3">3.3.</span> Miscellaneous</h3>
+<div id="outline-container-orgbfec2ce" class="outline-3">
+<h3 id="orgbfec2ce"><span class="section-number-3">3.3.</span> Miscellaneous</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Use command as meta in macOS.
@@ -603,12 +605,12 @@ Stop fighting indentation in Org mode code snippets.
 </div>
 </div>
 
-<div id="outline-container-org4e56103" class="outline-2">
-<h2 id="org4e56103"><span class="section-number-2">4.</span> Languages</h2>
+<div id="outline-container-org2098098" class="outline-2">
+<h2 id="org2098098"><span class="section-number-2">4.</span> Languages</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgbb2d910" class="outline-3">
-<h3 id="orgbb2d910"><span class="section-number-3">4.1.</span> Tools</h3>
+<div id="outline-container-orgcbb757b" class="outline-3">
+<h3 id="orgcbb757b"><span class="section-number-3">4.1.</span> Tools</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Syntax checking.
@@ -631,8 +633,8 @@ Completion
 </div>
 </div>
 
-<div id="outline-container-org81063ad" class="outline-4">
-<h4 id="org81063ad"><span class="section-number-4">4.1.1.</span> Language server protocol</h4>
+<div id="outline-container-org9f4511f" class="outline-4">
+<h4 id="org9f4511f"><span class="section-number-4">4.1.1.</span> Language server protocol</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 Settings for LSP.
@@ -667,8 +669,8 @@ Settings for LSP.
 </div>
 </div>
 
-<div id="outline-container-org6f3349e" class="outline-3">
-<h3 id="org6f3349e"><span class="section-number-3">4.2.</span> Lisps</h3>
+<div id="outline-container-orgb069717" class="outline-3">
+<h3 id="orgb069717"><span class="section-number-3">4.2.</span> Lisps</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Pseudo-structural editing.
@@ -701,8 +703,8 @@ Prettify lambda.
 </div>
 </div>
 
-<div id="outline-container-org7427cc6" class="outline-4">
-<h4 id="org7427cc6"><span class="section-number-4">4.2.1.</span> Scheme</h4>
+<div id="outline-container-orga32646e" class="outline-4">
+<h4 id="orga32646e"><span class="section-number-4">4.2.1.</span> Scheme</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 Set scheme interpreter to Chicken Scheme.
@@ -732,8 +734,8 @@ Prettify symbols.
 </div>
 </div>
 
-<div id="outline-container-orga5db254" class="outline-3">
-<h3 id="orga5db254"><span class="section-number-3">4.3.</span> OCaml</h3>
+<div id="outline-container-orgad88c01" class="outline-3">
+<h3 id="orgad88c01"><span class="section-number-3">4.3.</span> OCaml</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 These packages are installed via `opam`, not from MELPA.
@@ -766,8 +768,8 @@ Better error message.
 </div>
 </div>
 
-<div id="outline-container-org20f1827" class="outline-3">
-<h3 id="org20f1827"><span class="section-number-3">4.4.</span> Python</h3>
+<div id="outline-container-org4862d73" class="outline-3">
+<h3 id="org4862d73"><span class="section-number-3">4.4.</span> Python</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Use <code>elpy</code>.
@@ -781,8 +783,8 @@ Use <code>elpy</code>.
 </div>
 </div>
 
-<div id="outline-container-orgf19911e" class="outline-3">
-<h3 id="orgf19911e"><span class="section-number-3">4.5.</span> Org mode</h3>
+<div id="outline-container-org652735c" class="outline-3">
+<h3 id="org652735c"><span class="section-number-3">4.5.</span> Org mode</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 Font size and symbols.
@@ -851,8 +853,8 @@ Babel.
 </div>
 </div>
 
-<div id="outline-container-org992eefa" class="outline-4">
-<h4 id="org992eefa"><span class="section-number-4">4.5.1.</span> LaTeX</h4>
+<div id="outline-container-org782cc9a" class="outline-4">
+<h4 id="org782cc9a"><span class="section-number-4">4.5.1.</span> LaTeX</h4>
 <div class="outline-text-4" id="text-4-5-1">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(use-package ox
@@ -864,12 +866,22 @@ Babel.
   (setq org-preview-latex-default-process 'dvisvgm))
 </pre>
 </div>
+
+<p>
+DocView settings for preview.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq doc-view-resolution 600)
+(add-hook 'doc-view-mode-hook 'auto-revert-mode)
+(add-hook 'doc-view-mode-hook 'doc-view-fit-width-to-window)
+</pre>
+</div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgca58288" class="outline-3">
-<h3 id="orgca58288"><span class="section-number-3">4.6.</span> Miscellaneous</h3>
+<div id="outline-container-orgbb3319f" class="outline-3">
+<h3 id="orgbb3319f"><span class="section-number-3">4.6.</span> Miscellaneous</h3>
 <div class="outline-text-3" id="text-4-6">
 <p>
 Visually match parentheses.
@@ -884,13 +896,26 @@ Visually match parentheses.
 </div>
 </div>
 
-<div id="outline-container-org461e03c" class="outline-2">
-<h2 id="org461e03c"><span class="section-number-2">5.</span> Miscellaneous</h2>
+<div id="outline-container-org1852c09" class="outline-2">
+<h2 id="org1852c09"><span class="section-number-2">5.</span> Miscellaneous</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org103d716" class="outline-3">
-<h3 id="org103d716"><span class="section-number-3">5.1.</span> Git</h3>
+<div id="outline-container-orge44949a" class="outline-3">
+<h3 id="orge44949a"><span class="section-number-3">5.1.</span> Other Emacs settings</h3>
 <div class="outline-text-3" id="text-5-1">
+<p>
+Always select the help window.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq help-window-select t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org27688c6" class="outline-3">
+<h3 id="org27688c6"><span class="section-number-3">5.2.</span> Git</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 Use <code>Magit</code>.
 </p>
@@ -903,9 +928,9 @@ Use <code>Magit</code>.
 </div>
 </div>
 
-<div id="outline-container-org880f419" class="outline-3">
-<h3 id="org880f419"><span class="section-number-3">5.2.</span> Project management</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-org718a816" class="outline-3">
+<h3 id="org718a816"><span class="section-number-3">5.3.</span> Project management</h3>
+<div class="outline-text-3" id="text-5-3">
 <p>
 Use <code>projectile</code>
 </p>
@@ -920,9 +945,9 @@ Use <code>projectile</code>
 </div>
 </div>
 
-<div id="outline-container-orga3477dc" class="outline-3">
-<h3 id="orga3477dc"><span class="section-number-3">5.3.</span> Dired</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-orgb36b6c2" class="outline-3">
+<h3 id="orgb36b6c2"><span class="section-number-3">5.4.</span> Dired</h3>
+<div class="outline-text-3" id="text-5-4">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(use-package dired
   :ensure nil
@@ -932,9 +957,9 @@ Use <code>projectile</code>
 </div>
 </div>
 
-<div id="outline-container-org1d8735f" class="outline-3">
-<h3 id="org1d8735f"><span class="section-number-3">5.4.</span> Terminal and shell</h3>
-<div class="outline-text-3" id="text-5-4">
+<div id="outline-container-org754f82a" class="outline-3">
+<h3 id="org754f82a"><span class="section-number-3">5.5.</span> Terminal and shell</h3>
+<div class="outline-text-3" id="text-5-5">
 <p>
 Use <code>vterm</code>.
 </p>
@@ -949,7 +974,7 @@ Use <code>vterm</code>.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jay Lee</p>
-<p class="date">Created: 2022-06-23 Thu 05:03</p>
+<p class="date">Created: 2022-06-24 Fri 12:51</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
