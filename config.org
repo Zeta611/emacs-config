@@ -163,7 +163,7 @@ Dashboard.
       (lambda () (get-buffer-create "*dashboard*")))
 
     (setq dashboard-banner-logo-title "Hi, Jay!")
-    (setq dashboard-startup-banner "~/Downloads/blackhole-lines.svg")
+    (setq dashboard-startup-banner "blackhole-lines.svg")
     (setq dashboard-image-banner-max-width 512)
     (setq dashboard-image-banner-max-height 512)
     (setq dashboard-center-content t)
