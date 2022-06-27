@@ -326,6 +326,27 @@ Better error message.
   (add-hook 'caml-mode-hook #'set-ocaml-error-regexp)
 #+end_src
 
+** ReScript
+#+begin_src emacs-lisp
+  (use-package rescript-mode
+    :ensure t)
+  (use-package lsp-rescript
+    :ensure t)
+  ;; Tell `rescript-mode` how to run your copy of `server.js` from rescript-vscode
+  ;; (you'll have to adjust the path here to match your local system):
+  (customize-set-variable
+   'lsp-rescript-server-command
+   '("node" "/Users/jay/.vscode/extensions/chenglou92.rescript-vscode-1.3.0/server/out/server.js" "--stdio"))
+  (with-eval-after-load 'rescript-mode
+    ;; Tell `lsp-mode` about the `rescript-vscode` LSP server
+    (require 'lsp-rescript)
+    ;; Enable `lsp-mode` in rescript-mode buffers
+    (add-hook 'rescript-mode-hook 'lsp-deferred)
+    ;; Enable display of type information in rescript-mode buffers
+    (require 'lsp-ui)
+    (add-hook 'rescript-mode-hook 'lsp-ui-doc-mode))
+#+end_src
+
 ** Python
 Use =elpy=.
 #+begin_src emacs-lisp
@@ -415,6 +436,10 @@ Visually match parentheses.
     :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+end_src
 
+#+begin_src emacs-lisp
+  (global-auto-revert-mode 1)
+#+end_src
+
 * Miscellaneous
 ** Other Emacs settings
 Always select the help window.
@@ -451,5 +476,10 @@ Use =projectile=
 Use =vterm=.
 #+begin_src emacs-lisp
   (use-package vterm
+    :ensure t)
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package multi-vterm
     :ensure t)
 #+end_src
