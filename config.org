@@ -216,9 +216,22 @@ Stop fighting indentation in Org mode code snippets.
   (setq org-adapt-indentation nil)
 #+end_src
 
+Temporarily maximize a buffer.
+#+begin_src emacs-lisp
+  (defun toggle-maximize-buffer ()
+    "Maximize a buffer temporarily."
+    (interactive)
+    (if (= 1 (length (window-list)))
+	(jump-to-register '_)
+      (progn
+	(window-configuration-to-register '_)
+	(delete-other-windows))))
+  (global-set-key (kbd "<C-M-return>") #'toggle-maximize-buffer)
+#+end_src
+
 * Languages
 ** Tools
-Syntax checking.
+Syntax checking
 #+begin_src emacs-lisp
   (use-package flycheck
     :ensure t
@@ -238,6 +251,7 @@ Settings for LSP.
   (use-package lsp-mode
     :ensure t
     :init (setq lsp-keymap-prefix "C-c l")
+    :bind (("C-c d" . lsp-find-definition))
     :hook
     ((tuareg-mode . lsp)
      (lsp-mode . lsp-enable-which-key-integration))
