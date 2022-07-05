@@ -393,9 +393,9 @@ Font size and symbols.
     (setq org-n-level-faces 4)
     ;; Document Title, (\huge)
     (set-face-attribute 'org-document-title nil
-                        :height 2.074
-                        :foreground 'unspecified
-                        :inherit 'org-level-8)
+			:height 2.074
+			:foreground 'unspecified
+			:inherit 'org-level-8)
     (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 #+end_src
 
@@ -433,6 +433,13 @@ Babel.
           (plist-put org-format-latex-options :scale 1.5))
     (setq org-latex-create-formula-image-program 'dvisvgm)
     (setq org-preview-latex-default-process 'dvisvgm))
+#+end_src
+
+Automatically toggle LaTeX fragment previews.
+#+begin_src emacs-lisp
+  (use-package org-fragtog
+    :ensure t
+    :hook (org-mode . org-fragtog-mode))
 #+end_src
 
 DocView settings for preview.
