@@ -1,4 +1,4 @@
-% Created 2022-06-29 Wed 01:01
+% Created 2022-07-22 Fri 23:04
 % Intended LaTeX compiler: xelatex
 \documentclass[a4paper,11pt]{article}
 \usepackage{graphicx}
@@ -36,9 +36,9 @@
 
 
 \section{Package management}
-\label{sec:orgcc9e92a}
+\label{sec:org93e95e7}
 \subsection{MELPA}
-\label{sec:org6e198a1}
+\label{sec:org846a4dd}
 \begin{verbatim}
 (require 'package)
 (add-to-list 'package-archives
@@ -47,7 +47,7 @@
 \end{verbatim}
 
 \subsection{Better package setup}
-\label{sec:org7c44c14}
+\label{sec:orgc7efc64}
 Use \texttt{use-package}
 \begin{verbatim}
 (unless (package-installed-p 'use-package)
@@ -60,7 +60,7 @@ Use \texttt{use-package}
 \end{verbatim}
 
 \subsection{Modernized package menu}
-\label{sec:org5584330}
+\label{sec:org45c125b}
 Use \texttt{paradox}.
 \begin{verbatim}
 (use-package paradox
@@ -69,9 +69,9 @@ Use \texttt{paradox}.
 \end{verbatim}
 
 \section{Pretty Emacs}
-\label{sec:org8be2244}
+\label{sec:org2726d57}
 \subsection{Theme}
-\label{sec:org3f62cd5}
+\label{sec:org5489351}
 Although \href{https://github.blog/2022-06-08-sunsetting-atom/}{Atom is being sunset by GitHub}, the default theme it provided is one of the best-looking and easy-on-the-eyes color scheme out in the wild.
 \texttt{doom-one} theme is more actively maintained than \texttt{atom-one-dark-theme}.
 \begin{verbatim}
@@ -84,7 +84,7 @@ Although \href{https://github.blog/2022-06-08-sunsetting-atom/}{Atom is being su
 \end{verbatim}
 
 \subsection{Font}
-\label{sec:orgcb3f232}
+\label{sec:org2daa1d8}
 JuliaMono provides the most comprehensive unicode support.
 \begin{verbatim}
 (set-frame-font "JuliaMono 15" nil t)
@@ -113,7 +113,7 @@ Vim & 빔\\
 \end{center}
 
 \subsection{Icons}
-\label{sec:orgddab7b6}
+\label{sec:org10be7e0}
 \begin{verbatim}
 (use-package all-the-icons
   :ensure t
@@ -121,7 +121,7 @@ Vim & 빔\\
 \end{verbatim}
 
 \subsection{Modeline Theme}
-\label{sec:orge38abdc}
+\label{sec:org6058503}
 \begin{verbatim}
 (use-package doom-modeline
   :ensure t
@@ -129,7 +129,7 @@ Vim & 빔\\
 \end{verbatim}
 
 \subsection{File explorer}
-\label{sec:orgcb1223a}
+\label{sec:org5ea5c36}
 A Tree layout file explorer.
 \begin{verbatim}
 (use-package treemacs
@@ -154,7 +154,7 @@ A Tree layout file explorer.
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:org8971a2d}
+\label{sec:org4d61869}
 Seamless title bar in macOS.
 \begin{verbatim}
 (tool-bar-mode -1)
@@ -210,9 +210,9 @@ Dashboard.
 \end{verbatim}
 
 \section{Key bindings}
-\label{sec:orgba78cc6}
+\label{sec:org3306657}
 \subsection{Hints}
-\label{sec:orgd00951a}
+\label{sec:org992f497}
 Show what key bindings are available.
 \begin{verbatim}
 (use-package which-key
@@ -230,7 +230,7 @@ Show completions.
 \end{verbatim}
 
 \subsection{Navigation}
-\label{sec:org506e1ee}
+\label{sec:org71730e4}
 Incremental search using ivy.
 \begin{verbatim}
 (use-package swiper
@@ -246,8 +246,25 @@ Use numbering to move frames.
   :config (window-numbering-mode))
 \end{verbatim}
 
+Automatically move to the newly opened split window.
+\begin{verbatim}
+(global-set-key "\C-x2" (lambda () (interactive) (split-window-vertically) (other-window 1)))
+(global-set-key "\C-x3" (lambda () (interactive) (split-window-horizontally) (other-window 1)))
+\end{verbatim}
+
+Easymotion in Emacs!
+\begin{verbatim}
+(use-package avy
+  :ensure t
+  :bind
+  (("C-;" . 'avy-goto-char)
+   ("M-g l" . 'avy-goto-line)
+   ("M-g w" . 'avy-goto-word-1)
+   ("M-g e" . 'avy-goto-word-0)))
+\end{verbatim}
+
 \subsection{Miscellaneous}
-\label{sec:org09dfba2}
+\label{sec:org5d8256a}
 Use command as meta in macOS.
 \begin{verbatim}
 (setq mac-command-modifier 'meta)
@@ -272,10 +289,10 @@ Temporarily maximize a buffer.
 \end{verbatim}
 
 \section{Languages}
-\label{sec:org820f8e5}
+\label{sec:orgf08e45f}
 \subsection{Tools}
-\label{sec:orgbe07bbb}
-Syntax checking.
+\label{sec:org7fa1523}
+Syntax checking
 \begin{verbatim}
 (use-package flycheck
   :ensure t
@@ -290,13 +307,14 @@ Completion
 \end{verbatim}
 
 \subsubsection{Language server protocol}
-\label{sec:org192b6db}
+\label{sec:orge1caf1a}
 Settings for LSP.
 \begin{verbatim}
 (use-package lsp-mode
   :ensure t
   :init (setq lsp-keymap-prefix "C-c l")
-  :bind (("C-c d" . lsp-find-definition))
+  :bind (("C-c d" . lsp-find-definition)
+	 ("C-c r" . lsp-rename))
   :hook
   ((tuareg-mode . lsp)
    (lsp-mode . lsp-enable-which-key-integration))
@@ -320,7 +338,7 @@ Settings for LSP.
 \end{verbatim}
 
 \subsection{Lisps}
-\label{sec:org7b2f10b}
+\label{sec:orgabb9916}
 Pseudo-structural editing.
 \begin{verbatim}
 (use-package paredit
@@ -346,7 +364,7 @@ Prettify lambda.
 \end{verbatim}
 
 \subsubsection{Scheme}
-\label{sec:orga222c75}
+\label{sec:orgf9c750e}
 Set scheme interpreter to Chicken Scheme.
 \begin{verbatim}
 (setq scheme-program-name "csi")
@@ -364,7 +382,7 @@ Prettify symbols.
 \end{verbatim}
 
 \subsection{OCaml}
-\label{sec:org2e239ad}
+\label{sec:orgf87047b}
 These packages are installed via `opam`, not from MELPA.
 \begin{verbatim}
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
@@ -389,7 +407,7 @@ Better error message.
 \end{verbatim}
 
 \subsection{ReScript}
-\label{sec:org5b76676}
+\label{sec:orga6d4f3b}
 \begin{verbatim}
 (use-package rescript-mode
   :ensure t)
@@ -411,7 +429,7 @@ Better error message.
 \end{verbatim}
 
 \subsection{Python}
-\label{sec:org11dc5ef}
+\label{sec:org51d7e21}
 Use \texttt{elpy}.
 \begin{verbatim}
 (use-package elpy
@@ -420,7 +438,7 @@ Use \texttt{elpy}.
 \end{verbatim}
 
 \subsection{Org mode}
-\label{sec:orgc0129a2}
+\label{sec:org5d31b4f}
 Font size and symbols.
 \begin{verbatim}
 (use-package org-superstar
@@ -476,7 +494,7 @@ Babel.
 \end{verbatim}
 
 \subsubsection{\LaTeX{}}
-\label{sec:org5432e64}
+\label{sec:org1bc3c0f}
 \begin{verbatim}
 (use-package ox
   :ensure nil
@@ -487,6 +505,13 @@ Babel.
   (setq org-preview-latex-default-process 'dvisvgm))
 \end{verbatim}
 
+Automatically toggle \LaTeX{} fragment previews.
+\begin{verbatim}
+(use-package org-fragtog
+  :ensure t
+  :hook (org-mode . org-fragtog-mode))
+\end{verbatim}
+
 DocView settings for preview.
 \begin{verbatim}
 (setq doc-view-resolution 600)
@@ -495,7 +520,7 @@ DocView settings for preview.
 \end{verbatim}
 
 \subsection{Miscellaneous}
-\label{sec:orge10007f}
+\label{sec:org3475140}
 Visually match parentheses.
 \begin{verbatim}
 (use-package rainbow-delimiters
@@ -508,16 +533,16 @@ Visually match parentheses.
 \end{verbatim}
 
 \section{Miscellaneous}
-\label{sec:org90f9155}
+\label{sec:orgc218ebf}
 \subsection{Other Emacs settings}
-\label{sec:orgc755e0e}
+\label{sec:org37fcd2c}
 Always select the help window.
 \begin{verbatim}
 (setq help-window-select t)
 \end{verbatim}
 
 \subsection{Git}
-\label{sec:org7bd541b}
+\label{sec:orgc757d17}
 Use \texttt{Magit}.
 \begin{verbatim}
 (use-package magit
@@ -526,7 +551,7 @@ Use \texttt{Magit}.
 \end{verbatim}
 
 \subsection{Project management}
-\label{sec:org9552ee2}
+\label{sec:org39f3700}
 Use \texttt{projectile}
 \begin{verbatim}
 (use-package projectile
@@ -537,7 +562,7 @@ Use \texttt{projectile}
 \end{verbatim}
 
 \subsection{Dired}
-\label{sec:org7176a04}
+\label{sec:orga03259c}
 \begin{verbatim}
 (use-package dired
   :ensure nil
@@ -545,7 +570,7 @@ Use \texttt{projectile}
 \end{verbatim}
 
 \subsection{Terminal and shell}
-\label{sec:org41aba48}
+\label{sec:orgc26871e}
 Use \texttt{vterm}.
 \begin{verbatim}
 (use-package vterm

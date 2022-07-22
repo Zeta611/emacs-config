@@ -205,6 +205,23 @@ Use numbering to move frames.
     :config (window-numbering-mode))
 #+end_src
 
+Automatically move to the newly opened split window.
+#+begin_src emacs-lisp
+  (global-set-key "\C-x2" (lambda () (interactive) (split-window-vertically) (other-window 1)))
+  (global-set-key "\C-x3" (lambda () (interactive) (split-window-horizontally) (other-window 1)))
+#+end_src
+
+Easymotion in Emacs!
+#+begin_src emacs-lisp
+  (use-package avy
+    :ensure t
+    :bind
+    (("C-;" . 'avy-goto-char)
+     ("M-g l" . 'avy-goto-line)
+     ("M-g w" . 'avy-goto-word-1)
+     ("M-g e" . 'avy-goto-word-0)))
+#+end_src
+
 ** Miscellaneous
 Use command as meta in macOS.
 #+begin_src emacs-lisp
@@ -251,7 +268,8 @@ Settings for LSP.
   (use-package lsp-mode
     :ensure t
     :init (setq lsp-keymap-prefix "C-c l")
-    :bind (("C-c d" . lsp-find-definition))
+    :bind (("C-c d" . lsp-find-definition)
+	   ("C-c r" . lsp-rename))
     :hook
     ((tuareg-mode . lsp)
      (lsp-mode . lsp-enable-which-key-integration))
