@@ -118,6 +118,24 @@ A Tree layout file explorer.
     :ensure t)
 #+end_src
 
+** Tabs
+Tabs!
+#+begin_src emacs-lisp
+  (use-package centaur-tabs
+    :demand
+    :ensure t
+    :bind
+    ("C-<prior>" . centaur-tabs-backward)
+    ("C-<next>" . centaur-tabs-forward)
+    :config
+    (centaur-tabs-change-fonts "Fira Sans" 135)
+    (setq centaur-tabs-height 32
+	  centaur-tabs-set-icons t
+	  centaur-tabs-modified-marker (make-string 1 #x23FA)
+	  centaur-tabs-set-modified-marker t)
+    (centaur-tabs-mode t))
+#+end_src
+
 ** Miscellaneous
 Seamless title bar in macOS.
 #+begin_src emacs-lisp
