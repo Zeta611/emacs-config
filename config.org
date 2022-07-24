@@ -179,6 +179,8 @@ Dashboard.
     (setq initial-buffer-choice
       (lambda () (get-buffer-create "*dashboard*")))
 
+    (setq dashboard-projects-backend 'projectile)
+    (add-to-list 'dashboard-items '(projects . 5))
     (setq dashboard-banner-logo-title "Hi, Jay!")
     (setq dashboard-startup-banner "~/.emacs.d/blackhole-lines.svg")
     (setq dashboard-image-banner-max-width 512)
