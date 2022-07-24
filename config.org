@@ -51,7 +51,9 @@ Although [[https://github.blog/2022-06-08-sunsetting-atom/][Atom is being sunset
     :config
     (setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
-    (load-theme 'doom-one t))
+    (load-theme 'doom-one t)
+    (doom-themes-visual-bell-config)
+    (doom-themes-org-config))
 #+end_src
 
 ** Font
@@ -134,14 +136,6 @@ Line numbering.
 #+begin_src emacs-lisp
   (global-display-line-numbers-mode)
   (setq display-line-numbers-type 'relative)
-#+end_src
-
-Get rid of irritating beep-boops.
-#+begin_src emacs-lisp
-  (defun flash-mode-line ()
-    (invert-face 'mode-line)
-    (run-with-timer 0.1 nil #'invert-face 'mode-line))
-  (setq visible-bell nil ring-bell-function #'flash-mode-line)
 #+end_src
 
 Prettify symbols.
