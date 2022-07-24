@@ -91,6 +91,11 @@ D2Coding is scaled so that a single Korean letter corresponds to two ASCII lette
 #+begin_src emacs-lisp
   (use-package doom-modeline
     :ensure t
+    :config
+    (custom-set-faces
+     '(mode-line ((t (:family "Fira Sans" :height 135))))
+     '(mode-line-active ((t (:family "Fira Sans" :height 135))))
+     '(mode-line-inactive ((t (:family "Fira Sans" :height 135)))))
     :hook (after-init . doom-modeline-mode))
 #+end_src
 
