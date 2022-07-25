@@ -409,9 +409,42 @@ Use =elpy=.
 ** Org mode
 Font size and symbols.
 #+begin_src emacs-lisp
+  (use-package mixed-pitch
+    :hook
+    (org-mode . mixed-pitch-mode)
+    :config
+    (setq mixed-pitch-set-height t)
+    ;; (create-fontset-from-fontset-spec
+    ;;  (font-xlfd-name (font-spec :registry "fontset-variable")))
+    ;; (set-fontset-font "fontset-variable" 'latin (font-spec :name "EB Garamond" :size 19.0))
+    ;; (set-fontset-font "fontset-variable" 'hangul (font-spec :name "Noto Serif CJK KR" :size 19.0))
+    ;; (set-face-attribute 'variable-pitch nil :font "fontset-variable")
+    (set-face-attribute 'variable-pitch nil :font "EB Garamond" :height 190))
+
   (use-package org-modern
     :ensure t
     :config
+    ;; hide #+TITLE:
+    (setq org-hidden-keywords '(title))
+    (set-face-attribute 'org-default nil :height 1.5)
+    ;; set basic title font
+    (set-face-attribute 'org-level-8 nil :weight 'bold :inherit 'default)
+    ;; Low levels are unimportant = no scaling
+    (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
+    (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
+    (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
+    (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
+    ;; Top ones get scaled the same as in LaTeX (\large, \Large, \LARGE)
+    (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.2) ;\large
+    (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.44) ;\Large
+    (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.728) ;\LARGE
+    ;; Only use the first 4 styles and do not cycle.
+    (setq org-cycle-level-faces nil)
+    (setq org-n-level-faces 4)
+    ;; Document Title, (\huge)
+    (set-face-attribute 'org-document-title nil
+			:height 2.074
+			:foreground 'unspecified)
     (global-org-modern-mode))
 #+end_src
 
