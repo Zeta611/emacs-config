@@ -59,19 +59,23 @@ Although [[https://github.blog/2022-06-08-sunsetting-atom/][Atom is being sunset
 ** Font
 JuliaMono provides the most comprehensive unicode support.
 #+begin_src emacs-lisp
-  (set-frame-font "JuliaMono 15" nil t)
-  ; Apply the font to emacsclients
-  (add-to-list 'default-frame-alist '(font . "JuliaMono 15"))
+  (add-to-list 'after-make-frame-functions #'set-default-fonts)
+  (defun set-default-fonts (_)
+    (set-face-attribute 'default nil :font "JuliaMono 15")
+    (set-fontset-font "fontset-default" 'hangul (font-spec :family "D2Coding"))
+    )
+    ;;(setq face-font-rescale-alist '(("D2Coding" . 1.2))))
+  ;; (add-to-list 'default-frame-alist '(font . "JuliaMono 15"))
 #+end_src
 
 Use D2Coding for hangul (Korean letters).
 To reliably set a hangul font, it needs to be run lately.
 I did not experiment with the earliest possible stage it needs to run, but it does work when run in a hook `after-make-frame-functions`.
 #+begin_src emacs-lisp
-  (defun set-hangul-font (_)
-    (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
-    (setq face-font-rescale-alist '(("D2Coding" . 1.2))))
-  (add-to-list 'after-make-frame-functions #'set-hangul-font)
+  ;; (defun set-hangul-font (_)
+  ;;   (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
+  ;;   (setq face-font-rescale-alist '(("D2Coding" . 1.2))))
+  ;; (add-to-list 'after-make-frame-functions #'set-hangul-font)
 #+end_src
 
 D2Coding is scaled so that a single Korean letter corresponds to two ASCII letters:
@@ -409,17 +413,30 @@ Use =elpy=.
 ** Org mode
 Font size and symbols.
 #+begin_src emacs-lisp
+  (create-fontset-from-fontset-spec
+   (font-xlfd-name
+    (font-spec :family "EB Garamond"
+	       :size 18
+	       :registry "fontset-myvariable")))
+  ;;(set-fontset-font
+  ;; "fontset-myvariable"
+  ;; 'hangul (font-spec :family "Noto Serif CJK KR" :size 19 :registry "iso10646-1"))
+
+  ;; (defun set-variable-fonts (_)
+  ;;   (set-face-attribute
+  ;;   'variable-pitch nil :font "fontset-myvariable" :fontset "fontset-myvariable"))
+
+  ;; (add-to-list 'after-make-frame-functions #'set-variable-fonts)
+
   (use-package mixed-pitch
+    :ensure t
     :hook
     (org-mode . mixed-pitch-mode)
     :config
     (setq mixed-pitch-set-height t)
-    ;; (create-fontset-from-fontset-spec
-    ;;  (font-xlfd-name (font-spec :registry "fontset-variable")))
-    ;; (set-fontset-font "fontset-variable" 'latin (font-spec :name "EB Garamond" :size 19.0))
-    ;; (set-fontset-font "fontset-variable" 'hangul (font-spec :name "Noto Serif CJK KR" :size 19.0))
-    ;; (set-face-attribute 'variable-pitch nil :font "fontset-variable")
-    (set-face-attribute 'variable-pitch nil :font "EB Garamond" :height 190))
+    ;(set-variable-fonts t)
+    (set-face-attribute
+     'variable-pitch nil :font "fontset-myvariable" :fontset "fontset-myvariable"))
 
   (use-package org-modern
     :ensure t
