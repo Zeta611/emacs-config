@@ -154,6 +154,7 @@ Tabs!
 	  centaur-tabs-set-icons t
 	  centaur-tabs-modified-marker (make-string 1 #x23FA)
 	  centaur-tabs-set-modified-marker t)
+    (centaur-tabs-group-by-projectile-project)
     (centaur-tabs-mode t))
 #+end_src
 
