@@ -146,8 +146,8 @@ Tabs!
     :demand
     :ensure t
     :bind
-    ("C-<prior>" . centaur-tabs-backward)
-    ("C-<next>" . centaur-tabs-forward)
+    ("C-S-<tab>" . centaur-tabs-backward)
+    ("C-<tab>" . centaur-tabs-forward)
     :config
     (centaur-tabs-change-fonts "Fira Sans" 135)
     (setq centaur-tabs-height 32
