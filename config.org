@@ -588,3 +588,8 @@ Use =vterm=.
   (use-package multi-vterm
     :ensure t)
 #+end_src
+
+** Native compilation
+#+begin_src emacs-lisp
+  (setq native-comp-async-report-warnings-errors nil)
+#+end_src
