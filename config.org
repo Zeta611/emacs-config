@@ -440,15 +440,15 @@ Font size and symbols.
 
   ;; (add-to-list 'after-make-frame-functions #'set-variable-fonts)
 
-  (use-package mixed-pitch
-    :ensure t
-    :hook
-    (org-mode . mixed-pitch-mode)
-    :config
-    (setq mixed-pitch-set-height t)
-    ;(set-variable-fonts t)
-    (set-face-attribute
-     'variable-pitch nil :font "fontset-myvariable" :fontset "fontset-myvariable"))
+  ;; (use-package mixed-pitch
+  ;;   :ensure t
+  ;;   :hook
+  ;;   (org-mode . mixed-pitch-mode)
+  ;;   :config
+  ;;   (setq mixed-pitch-set-height t)
+  ;;   ;(set-variable-fonts t)
+  ;;   (set-face-attribute
+  ;;    'variable-pitch nil :font "fontset-myvariable" :fontset "fontset-myvariable"))
 
   ;;(use-package company-posframe
   ;;  :ensure t
