@@ -76,7 +76,7 @@ JuliaMono provides the most comprehensive unicode support.
     (set-face-attribute 'default nil :font "JuliaMono 15")
     (set-fontset-font "fontset-default" 'hangul (font-spec :family "D2Coding"))
     )
-    ;;(setq face-font-rescale-alist '(("D2Coding" . 1.2))))
+  (setq face-font-rescale-alist '(("D2Coding" . 1.2)))
   ;; (add-to-list 'default-frame-alist '(font . "JuliaMono 15"))
 #+end_src
 
@@ -449,6 +449,11 @@ Font size and symbols.
     ;(set-variable-fonts t)
     (set-face-attribute
      'variable-pitch nil :font "fontset-myvariable" :fontset "fontset-myvariable"))
+
+  (use-package company-posframe
+    :ensure t
+    :config
+    (company-posframe-mode 1))
 
   (use-package org-modern
     :ensure t
