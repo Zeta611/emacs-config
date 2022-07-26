@@ -450,10 +450,10 @@ Font size and symbols.
     (set-face-attribute
      'variable-pitch nil :font "fontset-myvariable" :fontset "fontset-myvariable"))
 
-  (use-package company-posframe
-    :ensure t
-    :config
-    (company-posframe-mode 1))
+  ;;(use-package company-posframe
+  ;;  :ensure t
+  ;;  :hook
+  ;;  (company-posframe-mode 1))
 
   (use-package org-modern
     :ensure t
