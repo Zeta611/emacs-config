@@ -56,6 +56,18 @@ Although [[https://github.blog/2022-06-08-sunsetting-atom/][Atom is being sunset
     (doom-themes-org-config))
 #+end_src
 
+Sync with the system theme.
+#+begin_src emacs-lisp
+  (defun my/apply-theme (appearance)
+    "Load theme, taking current system APPEARANCE into consideration."
+    (mapc #'disable-theme custom-enabled-themes)
+    (pcase appearance
+      ('light (load-theme 'doom-one-light t))
+      ('dark (load-theme 'doom-one t))))
+
+  (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
+#+end_src
+
 ** Font
 JuliaMono provides the most comprehensive unicode support.
 #+begin_src emacs-lisp
