@@ -423,6 +423,15 @@ Use =elpy=.
     :init (elpy-enable))
 #+end_src
 
+** TeX
+Use =AucTeX=.
+#+begin_src emacs-lisp
+  (use-package tex
+    :ensure auctex
+    :config
+    (setq TeX-view-program-selection '((output-pdf "Skim"))))
+#+end_src
+
 ** Org mode
 Font size and symbols.
 #+begin_src emacs-lisp
