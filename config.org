@@ -404,7 +404,7 @@ Better error message.
   ;; (you'll have to adjust the path here to match your local system):
   (customize-set-variable
    'lsp-rescript-server-command
-   '("node" "/Users/jay/.vscode/extensions/chenglou92.rescript-vscode-1.3.0/server/out/server.js" "--stdio"))
+   '("node" "/Users/jay/.vscode/extensions/chenglou92.rescript-vscode-1.4.2/server/out/server.js" "--stdio"))
   (with-eval-after-load 'rescript-mode
     ;; Tell `lsp-mode` about the `rescript-vscode` LSP server
     (require 'lsp-rescript)
@@ -412,6 +412,7 @@ Better error message.
     (add-hook 'rescript-mode-hook 'lsp-deferred)
     ;; Enable display of type information in rescript-mode buffers
     (require 'lsp-ui)
+    (add-hook 'before-save-hook 'lsp-format-buffer)
     (add-hook 'rescript-mode-hook 'lsp-ui-doc-mode))
 #+end_src
 
