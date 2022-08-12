@@ -416,6 +416,21 @@ Better error message.
     (add-hook 'rescript-mode-hook 'lsp-ui-doc-mode))
 #+end_src
 
+** Web
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :ensure t
+    :custom
+    (web-mode-markup-indent-offset 2)
+    (web-mode-css-indent-offset 2)
+    (web-mode-code-indent-offset 2))
+#+end_src
+
+** CSS
+#+begin_src emacs-lisp
+  (setq-default css-indent-offset 2)
+#+end_src
+
 ** Python
 Use =elpy=.
 #+begin_src emacs-lisp
