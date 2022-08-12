@@ -533,6 +533,15 @@ Babel.
   (setq org-confirm-babel-evaluate nil)
 #+end_src
 
+Agenda.
+#+begin_src emacs-lisp
+  (add-hook
+   'org-mode-hook
+   (setq org-agenda-files '("~/Documents/org-agenda/todo.org"))
+   (setq org-log-done 'time)
+   (setq org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))))
+#+end_src
+
 *** LaTeX
 #+begin_src emacs-lisp
   (use-package ox
