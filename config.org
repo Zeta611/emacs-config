@@ -263,6 +263,18 @@ Easymotion in Emacs!
      ("M-g e" . 'avy-goto-word-0)))
 #+end_src
 
+Jump like vimmers do!
+#+begin_src emacs-lisp
+  (use-package better-jumper
+    :ensure t
+    :init (better-jumper-mode 1)
+    :config
+    (define-key input-decode-map "\C-i" [C-i])
+    :bind
+    (("C-o" . 'better-jumper-jump-backward)
+     ("C-i" . 'better-jumper-jump-forward)))
+#+end_src
+
 ** Miscellaneous
 Use command as meta in macOS.
 #+begin_src emacs-lisp
@@ -301,6 +313,14 @@ Completion
   (use-package company
     :ensure t
     :init (global-company-mode))
+#+end_src
+
+EditorConfig.
+#+begin_src emacs-lisp
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 #+end_src
 
 *** Language server protocol
@@ -419,6 +439,17 @@ Better error message.
     (require 'lsp-ui)
     (add-hook 'before-save-hook 'lsp-format-buffer)
     (add-hook 'rescript-mode-hook 'lsp-ui-doc-mode))
+#+end_src
+
+** JavaScript
+#+begin_src emacs-lisp
+  (setq js-indent-level 2)
+  (add-hook 'js-mode-hook 'lsp)
+#+end_src
+
+** TypeScript
+#+begin_src emacs-lisp
+  (setq typescript-indent-level 2)
 #+end_src
 
 ** Web
