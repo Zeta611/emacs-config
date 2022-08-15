@@ -183,6 +183,11 @@ Prettify symbols.
   (global-prettify-symbols-mode 1)
 #+end_src
 
+Show time.
+#+begin_src emacs-lisp
+  (display-time-mode 1)
+#+end_src
+
 Dashboard.
 #+begin_src emacs-lisp
   ;; (use-package page-break-lines
