@@ -622,6 +622,10 @@ Always select the help window.
   (setq help-window-select t)
 #+end_src
 
+#+begin_src emacs-lisp
+  (setq frame-resize-pixelwise t)
+#+end_src
+
 ** Git
 Use =Magit=.
 #+begin_src emacs-lisp
