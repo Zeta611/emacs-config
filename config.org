@@ -450,6 +450,8 @@ Better error message.
 ** TypeScript
 #+begin_src emacs-lisp
   (setq typescript-indent-level 2)
+  (use-package typescript-mode
+    :ensure t)
 #+end_src
 
 ** Web
