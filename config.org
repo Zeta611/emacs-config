@@ -429,15 +429,20 @@ Better error message.
   ;; (you'll have to adjust the path here to match your local system):
   (customize-set-variable
    'lsp-rescript-server-command
-   '("node" "/Users/jay/.vscode/extensions/chenglou92.rescript-vscode-1.4.2/server/out/server.js" "--stdio"))
+   '("node" "/Users/jay/.vscode/extensions/chenglou92.rescript-vscode-1.5.18/server/out/server.js" "--stdio"))
   (with-eval-after-load 'rescript-mode
     ;; Tell `lsp-mode` about the `rescript-vscode` LSP server
+    (defun format-rescript ()
+      (interactive)
+      (when (eq major-mode 'rescript-mode)
+	(shell-command-to-string (format "yarn run rescript format %s" buffer-file-name))))
+    (add-hook 'after-save-hook #'format-rescript)
     (require 'lsp-rescript)
     ;; Enable `lsp-mode` in rescript-mode buffers
     (add-hook 'rescript-mode-hook 'lsp-deferred)
     ;; Enable display of type information in rescript-mode buffers
     (require 'lsp-ui)
-    (add-hook 'before-save-hook 'lsp-format-buffer)
+    ;; (add-hook 'before-save-hook 'lsp-format-buffer)
     (add-hook 'rescript-mode-hook 'lsp-ui-doc-mode))
 #+end_src
 
@@ -466,6 +471,11 @@ Better error message.
 
 ** CSS
 #+begin_src emacs-lisp
+  (use-package lsp-tailwindcss
+    :init
+    (setq lsp-tailwindcss-add-on-mode t)
+    :config
+    (add-to-list 'lsp-tailwindcss-major-modes 'rescript-mode))
   (setq-default css-indent-offset 2)
 #+end_src
 
