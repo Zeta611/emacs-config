@@ -174,7 +174,7 @@ Also remove the excessive scroll bar.
 
 Line numbering.
 #+begin_src emacs-lisp
-  (global-display-line-numbers-mode)
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (setq display-line-numbers-type 'relative)
 #+end_src
 
