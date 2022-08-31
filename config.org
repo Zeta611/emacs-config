@@ -615,6 +615,18 @@ DocView settings for preview.
   (add-hook 'doc-view-mode-hook 'doc-view-fit-width-to-window)
 #+end_src
 
+** Agda
+#+begin_src emacs-lisp
+  (load-file (let ((coding-system-for-read 'utf-8))
+	       (shell-command-to-string "agda-mode locate")))
+  ;; auto-load agda-mode for .agda and .lagda.md
+  (setq auto-mode-alist
+     (append
+       '(("\\.agda\\'" . agda2-mode)
+	 ("\\.lagda.md\\'" . agda2-mode))
+       auto-mode-alist))
+#+end_src
+
 ** Miscellaneous
 Visually match parentheses.
 #+begin_src emacs-lisp
