@@ -73,7 +73,7 @@
  '(org-agenda-files
    '("~/Documents/org-agenda/reading.org" "/Users/jay/Documents/org-agenda/todo.org"))
  '(package-selected-packages
-   '(typescript-mode editorconfig better-jumper web-mode auctex org-modern multi-vterm company flycheck dashboard lsp-treemacs lsp-ivy treemacs-magit treemacs-icons-dired magit treemacs lsp-ui lsp-mode doom-themes window-numbering which-key vterm use-package swiper rainbow-delimiters paredit paradox org-superstar ns-auto-titlebar geiser-chicken elpy doom-modeline atom-one-dark-theme all-the-icons))
+   '(ein typescript-mode editorconfig better-jumper web-mode auctex org-modern multi-vterm company flycheck dashboard lsp-treemacs lsp-ivy treemacs-magit treemacs-icons-dired magit treemacs lsp-ui lsp-mode doom-themes window-numbering which-key vterm use-package swiper rainbow-delimiters paredit paradox org-superstar ns-auto-titlebar geiser-chicken elpy doom-modeline atom-one-dark-theme all-the-icons))
  '(paradox-github-token t)
  '(warning-suppress-types
    '(((python python-shell-completion-native-turn-on-maybe))

@@ -487,6 +487,12 @@ Use =elpy=.
     :init (elpy-enable))
 #+end_src
 
+*** Jupyter
+#+begin_src emacs-lisp
+  (use-package ein
+    :ensure t)
+#+end_src
+
 ** TeX
 Use =AucTeX=.
 #+begin_src emacs-lisp
@@ -577,7 +583,8 @@ Babel.
   (org-babel-do-load-languages
     'org-babel-load-languages
     '((scheme . t)
-      (python . t)))
+      (python . t)
+      (ein . t)))
   (setq org-confirm-babel-evaluate nil)
 #+end_src
 
