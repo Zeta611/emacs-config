@@ -70,9 +70,6 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("afa47084cb0beb684281f480aa84dab7c9170b084423c7f87ba755b15f6776ef" default))
- '(org-agenda-files
-   '("~/Documents/org-agenda/reading.org" "/Users/jay/Documents/org-agenda/todo.org" "/Users/jay/Documents/org-agenda/exa.org" "/Users/jay/Documents/org-agenda/prospect.org" "/Users/jay/Documents/org-agenda/eko.org" "/Users/jay/Documents/org-agenda/gp.org"))
-
  '(package-selected-packages
    '(ein typescript-mode editorconfig better-jumper web-mode auctex org-modern multi-vterm company flycheck dashboard lsp-treemacs lsp-ivy treemacs-magit treemacs-icons-dired magit treemacs lsp-ui lsp-mode doom-themes window-numbering which-key vterm use-package swiper rainbow-delimiters paredit paradox org-superstar ns-auto-titlebar geiser-chicken elpy doom-modeline atom-one-dark-theme all-the-icons))
  '(paradox-github-token t)

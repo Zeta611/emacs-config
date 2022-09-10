@@ -398,13 +398,14 @@ Prettify symbols.
 ** OCaml
 These packages are installed via `opam`, not from MELPA.
 #+begin_src emacs-lisp
-  (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
-  (use-package ocamlformat
-    :ensure nil
-    :custom (ocamlformat-enable 'enable-outside-detected-project)
-    :bind (:map tuareg-mode-map
-                ("C-M-<tab>" . ocamlformat))
-    :hook (before-save . ocamlformat-before-save))
+  (if (eq system-type 'darwin)
+    (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+    (use-package ocamlformat
+      :ensure nil
+      :custom (ocamlformat-enable 'enable-outside-detected-project)
+      :bind (:map tuareg-mode-map
+  		("C-M-<tab>" . ocamlformat))
+      :hook (before-save . ocamlformat-before-save)))
 #+end_src
 
 Better error message.
@@ -592,7 +593,8 @@ Agenda.
 #+begin_src emacs-lisp
   (add-hook
    'org-mode-hook
-   (setq org-agenda-files '("~/Documents/org-agenda/todo.org"))
+   (if (eq system-type 'darwin)
+     (setq org-agenda-files '("~/Documents/org-agenda/reading.org" "/Users/jay/Documents/org-agenda/todo.org" "/Users/jay/Documents/org-agenda/exa.org" "/Users/jay/Documents/org-agenda/prospect.org" "/Users/jay/Documents/org-agenda/eko.org" "/Users/jay/Documents/org-agenda/gp.org")))
    (setq org-log-done 'time)
    (setq org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))))
 #+end_src
@@ -624,14 +626,15 @@ DocView settings for preview.
 
 ** Agda
 #+begin_src emacs-lisp
-  (load-file (let ((coding-system-for-read 'utf-8))
-	       (shell-command-to-string "agda-mode locate")))
-  ;; auto-load agda-mode for .agda and .lagda.md
-  (setq auto-mode-alist
-     (append
-       '(("\\.agda\\'" . agda2-mode)
-	 ("\\.lagda.md\\'" . agda2-mode))
-       auto-mode-alist))
+  (if (eq system-type 'darwin)
+    (load-file (let ((coding-system-for-read 'utf-8))
+  	       (shell-command-to-string "agda-mode locate")))
+    ;; auto-load agda-mode for .agda and .lagda.md
+    (setq auto-mode-alist
+       (append
+         '(("\\.agda\\'" . agda2-mode)
+  	 ("\\.lagda.md\\'" . agda2-mode))
+         auto-mode-alist)))
 #+end_src
 
 ** Miscellaneous
@@ -685,13 +688,15 @@ Use =projectile=
 ** Terminal and shell
 Use =vterm=.
 #+begin_src emacs-lisp
-  (use-package vterm
-    :ensure t)
+  (if (eq system-type 'darwin)
+    (use-package vterm
+      :ensure t))
 #+end_src
 
 #+begin_src emacs-lisp
-  (use-package multi-vterm
-    :ensure t)
+  (if (eq system-type 'darwin)
+    (use-package multi-vterm
+      :ensure t))
 #+end_src
 
 ** Native compilation
