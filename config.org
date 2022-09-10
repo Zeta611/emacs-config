@@ -73,7 +73,9 @@ JuliaMono provides the most comprehensive unicode support.
 #+begin_src emacs-lisp
   (add-to-list 'after-make-frame-functions #'set-default-fonts)
   (defun set-default-fonts (_)
-    (set-face-attribute 'default nil :font "JuliaMono 15")
+    (if (eq system-type 'darwin)
+	(set-face-attribute 'default nil :font "JuliaMono 15")
+	(set-face-attribute 'default nil :font "JuliaMono 12"))
     (set-fontset-font "fontset-default" 'hangul (font-spec :family "D2Coding"))
     )
   (setq face-font-rescale-alist '(("D2Coding" . 1.2)))
@@ -108,10 +110,15 @@ D2Coding is scaled so that a single Korean letter corresponds to two ASCII lette
   (use-package doom-modeline
     :ensure t
     :config
-    (custom-set-faces
-     '(mode-line ((t (:family "Fira Sans" :height 135))))
-     '(mode-line-active ((t (:family "Fira Sans" :height 135))))
-     '(mode-line-inactive ((t (:family "Fira Sans" :height 135)))))
+    (if (eq system-type 'darwin)
+	(custom-set-faces
+	 '(mode-line ((t (:family "Fira Sans" :height 135))))
+	 '(mode-line-active ((t (:family "Fira Sans" :height 135))))
+	 '(mode-line-inactive ((t (:family "Fira Sans" :height 135)))))
+	(custom-set-faces
+	 '(mode-line ((t (:family "Fira Sans" :height 115))))
+	 '(mode-line-active ((t (:family "Fira Sans" :height 115))))
+	 '(mode-line-inactive ((t (:family "Fira Sans" :height 115))))))
     :hook (after-init . doom-modeline-mode))
 #+end_src
 
@@ -149,7 +156,9 @@ Tabs!
     ("C-S-<tab>" . centaur-tabs-backward)
     ("C-<tab>" . centaur-tabs-forward)
     :config
-    (centaur-tabs-change-fonts "Fira Sans" 135)
+    (if (eq system-type 'darwin)
+	(centaur-tabs-change-fonts "Fira Sans" 135)
+	(centaur-tabs-change-fonts "Fira Sans" 115))
     (setq centaur-tabs-height 32
 	  centaur-tabs-set-icons t
 	  centaur-tabs-modified-marker (make-string 1 #x23FA)
