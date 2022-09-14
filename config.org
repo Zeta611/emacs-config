@@ -647,16 +647,28 @@ DocView settings for preview.
 #+end_src
 
 ** C
+I only use tab-indentation in C, so here it is:
 #+begin_src emacs-lisp
   (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 8)
+  (setq backward-delete-char-untabify-method 'hungry)
+
+  (setq-default c-default-style "k&r")
   (add-hook 'c-mode-common-hook
-    (lambda () (setq indent-tabs-mode t)))
+            (lambda () (setq indent-tabs-mode t)))
   (add-hook 'c-mode-common-hook 'lsp)
+
   (use-package smart-tabs-mode
     :ensure t
     :config
-    (setq-default tab-width 8)
     (smart-tabs-insinuate 'c))
+
+  (setq whitespace-style '(face tabs tab-mark trailing))
+  (custom-set-faces
+   '(whitespace-tab ((t (:foreground "#636363")))))
+  (setq whitespace-display-mappings
+        '((tab-mark 9 [124 9] [92 9]))) ; 124 is the ascii ID for '\|'
+  (global-whitespace-mode) ; Enable whitespace mode everywhere
 #+end_src
 
 ** Miscellaneous
