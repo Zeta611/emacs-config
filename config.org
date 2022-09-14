@@ -646,6 +646,19 @@ DocView settings for preview.
          auto-mode-alist)))
 #+end_src
 
+** C
+#+begin_src emacs-lisp
+  (setq-default indent-tabs-mode nil)
+  (add-hook 'c-mode-common-hook
+    (lambda () (setq indent-tabs-mode t)))
+  (add-hook 'c-mode-common-hook 'lsp)
+  (use-package smart-tabs-mode
+    :ensure t
+    :config
+    (setq-default tab-width 8)
+    (smart-tabs-insinuate 'c))
+#+end_src
+
 ** Miscellaneous
 Visually match parentheses.
 #+begin_src emacs-lisp
