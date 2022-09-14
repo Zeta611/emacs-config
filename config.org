@@ -737,3 +737,8 @@ Use =vterm=.
 #+begin_src emacs-lisp
   (setq native-comp-async-report-warnings-errors nil)
 #+end_src
+
+** GPG
+#+begin_src emacs-lisp
+  (setq epa-pinentry-mode 'loopback)
+#+end_src
