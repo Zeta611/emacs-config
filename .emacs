@@ -71,7 +71,7 @@
  '(custom-safe-themes
    '("afa47084cb0beb684281f480aa84dab7c9170b084423c7f87ba755b15f6776ef" default))
  '(package-selected-packages
-   '(smart-tabs-mode ein typescript-mode editorconfig better-jumper web-mode auctex org-modern multi-vterm company flycheck dashboard lsp-treemacs lsp-ivy treemacs-magit treemacs-icons-dired magit treemacs lsp-ui lsp-mode doom-themes window-numbering which-key vterm use-package swiper rainbow-delimiters paredit paradox org-superstar ns-auto-titlebar geiser-chicken elpy doom-modeline atom-one-dark-theme all-the-icons))
+   '(docker-tramp smart-tabs-mode ein typescript-mode editorconfig better-jumper web-mode auctex org-modern multi-vterm company flycheck dashboard lsp-treemacs lsp-ivy treemacs-magit treemacs-icons-dired magit treemacs lsp-ui lsp-mode doom-themes window-numbering which-key vterm use-package swiper rainbow-delimiters paredit paradox org-superstar ns-auto-titlebar geiser-chicken elpy doom-modeline atom-one-dark-theme all-the-icons))
  '(paradox-github-token t)
  '(warning-suppress-types
    '(((python python-shell-completion-native-turn-on-maybe))
@@ -83,4 +83,5 @@
  ;; If there is more than one, they won't work right.
  '(mode-line ((t (:family "Fira Sans" :height 135))))
  '(mode-line-active ((t (:family "Fira Sans" :height 135))))
- '(mode-line-inactive ((t (:family "Fira Sans" :height 135)))))
+ '(mode-line-inactive ((t (:family "Fira Sans" :height 135))))
+ '(whitespace-tab ((t (:foreground "#636363")))))
