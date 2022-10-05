@@ -716,7 +716,9 @@ Use =projectile=
 #+begin_src emacs-lisp
   (use-package dired
     :ensure nil
-    :config (setq dired-kill-when-opening-new-dired-buffer t))
+    :config
+    (setq dired-kill-when-opening-new-dired-buffer t)
+    (setq dired-dwim-target t))
 #+end_src
 
 ** Terminal and shell
