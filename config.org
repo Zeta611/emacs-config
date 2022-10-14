@@ -745,3 +745,16 @@ Use =vterm=.
   (use-package docker-tramp
     :ensure t)
 #+end_src
+
+** Presentation
+#+begin_src emacs-lisp
+  (use-package moom
+    :ensure t
+    :config (moom-mode 1))
+
+  (use-package org-tree-slide
+    :ensure t
+    :config
+    (global-set-key (kbd "<f8>") 'org-tree-slide-mode)
+    (global-set-key (kbd "S-<f8>") 'org-tree-slide-skip-done-toggle))
+#+end_src
