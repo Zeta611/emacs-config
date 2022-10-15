@@ -654,14 +654,15 @@ I only use tab-indentation in C, so here it is:
   (setq backward-delete-char-untabify-method 'hungry)
 
   (setq-default c-default-style "k&r")
+  (setq-default c-basic-offset 8)
   (add-hook 'c-mode-common-hook
             (lambda () (setq indent-tabs-mode t)))
   (add-hook 'c-mode-common-hook 'lsp)
 
-  (use-package smart-tabs-mode
-    :ensure t
-    :config
-    (smart-tabs-insinuate 'c))
+  ;;(use-package smart-tabs-mode
+  ;;  :ensure t
+  ;;  :config
+  ;;  (smart-tabs-insinuate 'c))
 
   (setq whitespace-style '(face tabs tab-mark trailing))
   (custom-set-faces
