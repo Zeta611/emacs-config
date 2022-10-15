@@ -603,7 +603,7 @@ Agenda.
   (add-hook
    'org-mode-hook
    (if (eq system-type 'darwin)
-     (setq org-agenda-files '("~/Documents/org-agenda/reading.org" "/Users/jay/Documents/org-agenda/todo.org" "/Users/jay/Documents/org-agenda/exa.org" "/Users/jay/Documents/org-agenda/prospect.org" "/Users/jay/Documents/org-agenda/eko.org" "/Users/jay/Documents/org-agenda/gp.org")))
+     (setq org-agenda-files '("~/Sync/org-agenda/reading.org" "/Users/jay/Sync/org-agenda/todo.org" "/Users/jay/Sync/org-agenda/exa.org" "/Users/jay/Sync/org-agenda/prospect.org" "/Users/jay/Sync/org-agenda/eko.org" "/Users/jay/Sync/org-agenda/gp.org")))
    (setq org-log-done 'time)
    (setq org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))))
 #+end_src
