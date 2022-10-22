@@ -407,7 +407,7 @@ Prettify symbols.
 ** OCaml
 These packages are installed via `opam`, not from MELPA.
 #+begin_src emacs-lisp
-  (if (eq system-type 'darwin)
+  (if (member system-type '(darwin gnu/linux))
     (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
     (use-package ocamlformat
       :ensure nil
