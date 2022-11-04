@@ -85,3 +85,6 @@
  '(mode-line-active ((t (:family "Fira Sans" :height 135))))
  '(mode-line-inactive ((t (:family "Fira Sans" :height 135))))
  '(whitespace-tab ((t (:foreground "#636363")))))
+
+(load-file (let ((coding-system-for-read 'utf-8))
+                (shell-command-to-string "agda-mode locate")))
