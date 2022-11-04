@@ -759,3 +759,9 @@ Use =vterm=.
     (global-set-key (kbd "<f8>") 'org-tree-slide-mode)
     (global-set-key (kbd "S-<f8>") 'org-tree-slide-skip-done-toggle))
 #+end_src
+
+** Center text
+#+begin_src emacs-lisp
+  (use-package olivetti
+    :ensure t)
+#+end_src
