@@ -239,6 +239,13 @@ Show completions.
     (setq ivy-use-virtual-buffers t))
 #+end_src
 
+Templates
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :config (yas-global-mode 1))
+#+end_src
+
 ** Navigation
 Incremental search using ivy.
 #+begin_src emacs-lisp
@@ -267,9 +274,9 @@ Easymotion in Emacs!
     :ensure t
     :bind
     (("C-;" . 'avy-goto-char)
-     ("M-g l" . 'avy-goto-line)
-     ("M-g w" . 'avy-goto-word-1)
-     ("M-g e" . 'avy-goto-word-0)))
+     ("C-, C-, l" . 'avy-goto-line)
+     ("C-, C-, w" . 'avy-goto-word-1)
+     ("C-, C-, e" . 'avy-goto-word-0)))
 #+end_src
 
 Jump like vimmers do!
@@ -439,7 +446,7 @@ Better error message.
   ;; (you'll have to adjust the path here to match your local system):
   (customize-set-variable
    'lsp-rescript-server-command
-   '("node" "/Users/jay/.vscode/extensions/chenglou92.rescript-vscode-1.5.18/server/out/server.js" "--stdio"))
+   '("node" "/Users/jay/.vscode/extensions/chenglou92.rescript-vscode-1.9.29/server/out/server.js" "--stdio"))
   (with-eval-after-load 'rescript-mode
     ;; Tell `lsp-mode` about the `rescript-vscode` LSP server
     (defun format-rescript ()
@@ -495,6 +502,16 @@ Use =elpy=.
   (use-package elpy
     :ensure t
     :init (elpy-enable))
+
+  (use-package lsp-pyright
+    :ensure t
+    :hook
+    (python-mode .
+      (lambda ()
+        (require 'lsp-pyright)
+        (lsp))))
+  (use-package blacken
+    :ensure t)
 #+end_src
 
 *** Jupyter
@@ -590,12 +607,47 @@ Do not open a new window when editing source.
 
 Babel.
 #+begin_src emacs-lisp
+  (setq org-image-actual-width (list 800))
+
   (org-babel-do-load-languages
     'org-babel-load-languages
     '((scheme . t)
       (python . t)
+      (ocaml . t)
       (ein . t)))
   (setq org-confirm-babel-evaluate nil)
+
+  (defvar org-babel-eval-verbose t
+    "A non-nil value makes `org-babel-eval' display")
+
+  (defun org-babel-eval (command query)
+    "Run COMMAND on QUERY.
+  Writes QUERY into a temp-buffer that is processed with
+  `org-babel--shell-command-on-region'.  If COMMAND succeeds then return
+  its results, otherwise display STDERR with
+  `org-babel-eval-error-notify'."
+    (let ((error-buffer (get-buffer-create " *Org-Babel Error*")) exit-code)
+      (with-current-buffer error-buffer (erase-buffer))
+      (with-temp-buffer
+        (insert query)
+        (setq exit-code
+          (org-babel--shell-command-on-region
+           command error-buffer))
+
+        (if (or (not (numberp exit-code)) (> exit-code 0)
+                (and org-babel-eval-verbose (> (buffer-size error-buffer) 0)))
+        (progn
+          (with-current-buffer error-buffer
+            (org-babel-eval-error-notify exit-code (buffer-string)))
+          (save-excursion
+            (when (get-buffer org-babel-error-buffer-name)
+          (with-current-buffer org-babel-error-buffer-name
+            (unless (derived-mode-p 'compilation-mode)
+              (compilation-mode))
+            ;; Compilation-mode enforces read-only, but Babel expects the buffer modifiable.
+            (setq buffer-read-only nil))))
+          nil)
+      (buffer-string)))))
 #+end_src
 
 Agenda.
@@ -635,15 +687,15 @@ DocView settings for preview.
 
 ** Agda
 #+begin_src emacs-lisp
-  (if (eq system-type 'darwin)
-    (load-file (let ((coding-system-for-read 'utf-8))
-  	       (shell-command-to-string "agda-mode locate")))
-    ;; auto-load agda-mode for .agda and .lagda.md
-    (setq auto-mode-alist
-       (append
-         '(("\\.agda\\'" . agda2-mode)
-  	 ("\\.lagda.md\\'" . agda2-mode))
-         auto-mode-alist)))
+;;  (if (eq system-type 'darwin)
+;;    (load-file (let ((coding-system-for-read 'utf-8))
+;;  	       (shell-command-to-string "agda-mode locate")))
+;;    ;; auto-load agda-mode for .agda and .lagda.md
+;;    (setq auto-mode-alist
+;;       (append
+;;         '(("\\.agda\\'" . agda2-mode)
+;;  	 ("\\.lagda.md\\'" . agda2-mode))
+;;         auto-mode-alist)))
 #+end_src
 
 ** C
