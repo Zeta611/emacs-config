@@ -446,7 +446,7 @@ Better error message.
   ;; (you'll have to adjust the path here to match your local system):
   (customize-set-variable
    'lsp-rescript-server-command
-   '("node" "/Users/jay/.vscode/extensions/chenglou92.rescript-vscode-1.9.29/server/out/server.js" "--stdio"))
+   '("node" "/Users/jay/.vscode/extensions/chenglou92.rescript-vscode-1.9.33/server/out/server.js" "--stdio"))
   (with-eval-after-load 'rescript-mode
     ;; Tell `lsp-mode` about the `rescript-vscode` LSP server
     (defun format-rescript ()
