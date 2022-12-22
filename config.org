@@ -270,13 +270,14 @@ Automatically move to the newly opened split window.
 
 Easymotion in Emacs!
 #+begin_src emacs-lisp
+  (global-unset-key (kbd "C-,"))
+  (local-unset-key (kbd "C-,"))
   (use-package avy
     :ensure t
     :bind
     (("C-;" . 'avy-goto-char)
-     ("C-, C-, l" . 'avy-goto-line)
-     ("C-, C-, w" . 'avy-goto-word-1)
-     ("C-, C-, e" . 'avy-goto-word-0)))
+     ("C-, l" . 'avy-goto-line)
+     ("C-, w" . 'avy-goto-word-0)))
 #+end_src
 
 Jump like vimmers do!
