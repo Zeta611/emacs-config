@@ -726,6 +726,21 @@ I only use tab-indentation in C, so here it is:
   (global-whitespace-mode) ; Enable whitespace mode everywhere
 #+end_src
 
+** Rust
+#+begin_src emacs-lisp
+  (use-package rust-mode
+    :ensure t
+    :config
+    (add-hook 'rust-mode-hook #'lsp)
+    (setq rust-format-on-save t)
+    (add-hook 'rust-mode-hook
+              (lambda () (prettify-symbols-mode)))
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+  (use-package flycheck-rust
+    :ensure t)
+#+end_src
+
 ** Miscellaneous
 Visually match parentheses.
 #+begin_src emacs-lisp
